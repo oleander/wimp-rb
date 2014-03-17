@@ -21,13 +21,13 @@ WiMP.configuration do |c|
 end
 ```
 
-Note 1: Not all methods below are implemented as below but 
-the code for all of them exists. Navigate the lib folder for more 
-information.
+- Note 1: Not all methods below are implemented as below but 
+  the code for all of them exists. Navigate the lib folder for more 
+  information.
 
-Note 2: The first request to the API will be a bit slower than the rest.
-That's because at the first request a session is created. The sesson isn't store
-on your local computer, but is instead kept in memory during execution.
+- Note 2: The first request to the API will be a bit slower than the rest.
+  That's because at the first request a session is created. The sesson isn't store
+  on your local computer, but is instead kept in memory during execution.
 
 ### Track
 
