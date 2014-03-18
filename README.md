@@ -125,7 +125,7 @@ welcome to help me migrate all these methods.
 Some methods from the offical API isn't ported to thrift. You'll find a list
 of these in the `resources/skipped-methods.md` file.
 
-### I'm get an `Thrift::ApplicationException` error
+### I'm get an `Thrift::ApplicationException` error, why?
 
 The `Thrift::ApplicationException` error indicates that the returning data
 from WiMP isn't what we think it is. It's usually caused by invalid data being passed
@@ -147,7 +147,7 @@ use it without first consulting WiMP.
 
 ## Contributing
 
-1. Fork it ( http://github.com/oleander/wimp-api-rb/fork )
+1. Fork it ( http://github.com/oleander/wimp-rb/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
