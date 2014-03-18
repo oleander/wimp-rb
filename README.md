@@ -105,7 +105,7 @@ that explains the basics.
 The WiMP API has support for streaming, but I've chosen not to include 
 those methods.
 
-### Where are the rest of the implementation?
+### Where is the rest of the implementation?
 
 Take a look at the `lib/gen` folder for more, undocumented code. Code
 exists for all 50 some methods in the thirft directory, but only a few are
@@ -115,7 +115,7 @@ welcome to help me migrate all these methods.
 Some methods from the offical API isn't ported to thrift. You'll find a list
 of these in the `resources/skipped-methods.md` file.
 
-### I'm get an `Thrift::ApplicationException` error when running method X
+### I'm get an `Thrift::ApplicationException` error
 
 The `Thrift::ApplicationException` error indicates that the returning data
 from WiMP isn't what we think it is. It's usually caused by invalid data being passed
@@ -132,8 +132,8 @@ the code for all of them exists. Navigate the `lib` folder for more information.
 That's because a session is created.
 
 3. None of the credentials in this project are my own. They're 
-only created to be used in the specs. They might therefore already be exired
-and when you read this.
+only created to be used in the specs. They might therefore already 
+be exired when you read this.
 
 ## Contributing
 
