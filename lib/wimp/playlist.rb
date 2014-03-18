@@ -32,13 +32,33 @@ module WiMP
     # @return Boolean Were the request sucessful?
     #
     def add_tracks(tracks, options = {})
+      add_tracks_by_id(tracks.map(&:id), options)
+    end
+
+    #
+    # @tracks Array<Integer> A list of Track#id
+    # @options[start_position] Integer Where 
+    #   should the new tracks be added?
+    # @return Boolean Were the request sucessful?
+    #
+    def add_tracks_by_id(track_ids, options = {})
       execute do |client|
         client.addTracksToUserPlaylist(
           uuid,
-          tracks.map(&:id),
-          options.fetch(:start_position),
-          WiMP.configuration.session
+          track_ids,
+          options.fetch(:start_position, 0),
+          session
         )
+      end
+    end
+
+    #
+    # @indices Array<Integer> Track positions
+    # @return Boolean Were the request successfull?
+    #
+    def remove_tracks_by_indices(indices)
+      execute do |client|
+        client.removeUserPlaylistTracks(uuid, indices, session)
       end
     end
 

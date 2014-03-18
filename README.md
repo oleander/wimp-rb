@@ -44,7 +44,7 @@ status = playlist.add_tracks(tracks, {
 #### Add tracks using track ids
 
 ``` ruby
-status = playlist.add_track_ids(track_ids, {
+status = playlist.add_tracks_by_id(track_ids, {
   start_position: 1
 })
 ```
@@ -58,7 +58,7 @@ playlist = WiMP::Playlist.create(title)
 #### Remove tracks
 
 ``` ruby
-status = playlist.remove_tracks(tracks)
+status = playlist.remove_tracks_by_indices(tracks)
 ```
 
 #### Find playlist
@@ -89,60 +89,19 @@ Take a look in at the `lib/gen` folder for more, undocumented code.
 ### Track
 
 - (*required*) **String** artist
-- (*required*) **String** album
-- (*optional*) **String** copyright
-- (*optional*) **String** small_album_cover
-- (*optional*) **String** medium_album_cover
-- (*optional*) **String** large_album_cover
-- (*optional*) **String** content_access_string
-- (*optional*) **String** version
-- (*optional*) **String** currency_code
-- (*optional*) **String** price_code
-- (*required*) **String** album_calculated_type
-- (*required*) **String** preview_url
-- (*optional*) **String** customizable_album_cover
-- (*required*) **String** revised_copyright
 - (*required*) **Integer** artist_id
 - (*required*) **Integer** album_id
 - (*required*) **Integer** duration
 - (*required*) **Integer** id
-- (*required*) **Integer** volume_number
-- (*required*) **Integer** track_number
-- (*required*) **Integer** album_nr_of_volumes
 - (*required*) **Integer** popularity
-- (*required*) **Integer** popularity_this_week
-- (*required*) **Float** search_score
-- (*required*) **Float** price
-- (*required*) **Date** sales_started_at
-- (*required*) **Date** stream_started_at
-- (*required*) **Boolean** sales_ready?
-- (*required*) **Boolean** stream_ready?
-- (*required*) **Boolean** album_only?
-- (*required*) **Boolean** album_broken?
-- (*required*) **Boolean** allow_streaming?
-- (*required*) **Boolean** premium_only_streaming?
-- (*required*) **Integer** popularity_level
-- (*required*) **Integer** sales_price_rule_id
-- (*required*) **RecordLabel** record_label
 
 ### Playlist
 
-struct Playlist {
-  1: required i32 count;
-  2: required i32 createdByArtistId;
-  3: required i32 duration;
-  4: optional string imgPath;
-  5: required i64 lastUpdated;
-  6: required string playlistName;
-  7: required i32 profileId;
-  8: required i64 registeredDate;
-  9: optional list<Track> tracks;
-  10: required string uuid;
-  11: optional i32 type;
-  12: optional string desc;
-  13: required i32 id;
-  14: optional string createdByNickName;
-}
+- (*required*) **Integer** count
+- (*required*) **String** url
+- (*optional*) **Array<Track>** tracks
+- (*required*) **String** uuid
+- (*required*) **Integer** id
 
 
 ## Notes

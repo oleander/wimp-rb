@@ -7,6 +7,7 @@ describe WiMP::Playlist, vcr: {record: :new_episodes} do
   end
 
   let(:uuid) { "83331404-e312-4fe3-a6eb-00843e195c7b" }
+  let(:playlist) { WiMP::Playlist.find(uuid) }
 
   it "should create a playlist" do
     playlist = WiMP::Playlist.create("Tjohoo")
@@ -14,11 +15,23 @@ describe WiMP::Playlist, vcr: {record: :new_episodes} do
   end
 
   it "should find by uuid" do
-    WiMP::Playlist.find(uuid).uuid.should eq(uuid)
+    playlist.uuid.should eq(uuid)
   end
 
-  it "should be able to add tracks to playlist", vcr: { record: :all } do
+  it "should be able to add tracks to playlist" do
     tracks = WiMP::Track.search("elvis", limit: 5)
-    WiMP::Playlist.find(uuid).add_tracks(tracks, start_position: 100).should be_true
+    playlist.add_tracks(tracks, start_position: 100).should be_true
+  end
+
+  it "should add my track id" do
+    playlist.add_tracks_by_id([415672]).should be_true
+  end
+
+  it "should be able to remove tracks" do
+    playlist.remove_tracks_by_indices([1,2,3]).should be_true
+  end
+
+  it "should not crash on invalid pos" do
+    playlist.remove_tracks_by_indices([400]).should be_true
   end
 end
