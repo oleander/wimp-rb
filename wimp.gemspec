@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Linus Oleander"]
   spec.email         = ["linus@oleander.nu"]
   spec.summary       = %q{Ruby bindings for WiMP}
-  spec.homepage      = "https://github.com/oleander/wimp-api-rb"
+  spec.homepage      = "https://github.com/oleander/wimp-rb"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
