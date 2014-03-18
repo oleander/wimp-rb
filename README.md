@@ -92,9 +92,9 @@ status = playlist.remove_tracks_by_indices(tracks)
 
 ### Can I port this library to language X?
 
-Yes. WiMP uses [thrift](http://thrift.apache.org/) behind the scene, 
+Probably. WiMP uses [thrift](http://thrift.apache.org/) behind the scene, 
 which means that code to over 7 languages can be generated. Take a look 
-in the `resources/thrift` folder and the `Rakefile` file for more 
+at the `resources/thrift` folder and the `Rakefile` file for more 
 information on how this could be done.
 
 [Here is a good thirft tutorial](http://diwakergupta.github.io/thrift-missing-guide/) 
