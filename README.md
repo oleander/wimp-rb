@@ -1,7 +1,9 @@
 # WiMP
 
-Ruby bindings for [WiMP](http://wimpmusic.com). It uses WiMPs internal RPC API.
-Take a look at the [FAQ](#faq) for frequently asked questions and how to port this library to any other language using [thrift](http://thrift.apache.org/).
+Ruby bindings for [WiMP](http://wimpmusic.com). The library uses WiMPs 
+internal RPC API. Take a look at the [FAQ](#faq) for frequently asked 
+questions and how to port this library to any language using 
+[thrift](http://thrift.apache.org/).
 
 ## Installation
 
@@ -11,7 +13,7 @@ $ gem install wimp
 
 ## Usage
 
-You must have a premium acount to be able to use this library.
+Keep in mind that you need premium acount for this to work.
 
 ``` ruby
 WiMP.configure do |config|
