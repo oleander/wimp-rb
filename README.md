@@ -73,20 +73,20 @@ status = playlist.remove_tracks_by_indices(tracks)
 
 ### Track
 
-- (*required*) **String** artist
-- (*required*) **Integer** artist_id
-- (*required*) **Integer** album_id
-- (*required*) **Integer** duration
-- (*required*) **Integer** id
-- (*required*) **Integer** popularity
+- artist **String**
+- artist_id **Integer**
+- album_id **Integer**
+- duration **Integer**
+- id **Integer**
+- popularity **Integer**
 
 ### Playlist
 
-- (*required*) **Integer** count
-- (*required*) **String** url
-- (*optional*) **Array<Track>** tracks
-- (*required*) **String** uuid
-- (*required*) **Integer** id
+- count **Integer**
+- url **String**
+- tracks **Array<Track>**
+- uuid **String**
+- id **Integer**
 
 ## FAQ
 
