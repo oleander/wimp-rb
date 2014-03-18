@@ -80,5 +80,12 @@ module WiMP
     def title
       @o.title
     end
+
+    #
+    # @return SimpleArtist
+    #
+    def artist
+      @_artist ||= SimpleArtist.new(@o.artist, artist_id)
+    end
   end
 end

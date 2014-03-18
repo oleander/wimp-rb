@@ -74,12 +74,12 @@ status = playlist.remove_tracks_by_indices(tracks)
 ### Track
 
 - title **String**
-- artist **String**
-- artist_id **Integer**
 - album_id **Integer**
 - duration **Integer**
 - id **Integer**
 - popularity **Integer**
+- artist **SimpleArtist**
+- url **String**
 
 ### Playlist
 
@@ -88,6 +88,12 @@ status = playlist.remove_tracks_by_indices(tracks)
 - tracks **Array<Track>**
 - uuid **String**
 - id **Integer**
+
+### SimpleArtist
+
+- id **Integer**
+- name **String**
+- url **String**
 
 ## FAQ
 

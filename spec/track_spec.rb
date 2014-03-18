@@ -12,9 +12,11 @@ describe WiMP::Track, vcr: {record: :new_episodes} do
     tracks.each do |track|
       track.title.should be_a(String)
       track.id.should be_a(Integer)
-      track.artist.should be_a(String)
       track.artist_id.should be_a(Integer)
       track.url.should match(%r{http://wimpmusic.se/track/\d+})
+      track.artist.url.should match(%r{http://wimpmusic.se/artist/\d+})
+      track.artist.name.should be_a(String)
+      track.artist.id.should be_a(Integer)
     end
   end
 
