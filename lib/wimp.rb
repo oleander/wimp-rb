@@ -1,7 +1,10 @@
 $:.push('./lib/gen')
+require "gen/client_api_login_service"
+require "gen/client_api_service"
 require "wimp/version"
 require "wimp/error"
-require "gen/client_api_login_service"
+require "wimp/base"
+require "wimp/track"
 
 module WiMP
   class << self
@@ -28,7 +31,7 @@ module WiMP
       @_session ||= begin
         transport = Thrift::HTTPClientTransport.new(SECURE_LOGIN_URL)
         protocol = Thrift::BinaryProtocol.new(transport)
-        client = ClientApiLoginService::Client.new(protocol)
+        client = Gen::ClientApiLoginService::Client.new(protocol)
         transport.open
         result = client.simpleLogin(
           username,

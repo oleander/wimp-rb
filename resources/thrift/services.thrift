@@ -1,4 +1,4 @@
-namespace rb WiMP
+namespace rb WiMP.Gen
 
 enum AlbumOrderBy {
   POPULARITY = 1,
@@ -100,7 +100,7 @@ struct Track {
   8: optional string smallAlbumCover;
   9: optional string mediumAlbumCover;
   10: optional string largeAlbumCover;
-  11: required i32 trackId;
+  11: required i32 id;
   12: optional string contentAccessString;
   13: required i32 volumeNumber;
   14: required i32 trackNumber;
@@ -189,10 +189,10 @@ struct Playlist {
 }
 
 struct SearchResult {
-  1: required list<Artist> artists;
-  2: required list<Track> tracks;
-  3: required list<Album> albums;
-  4: required list<Playlist> playlist;
+  1: optional list<Artist> artists;
+  2: optional list<Track> tracks;
+  3: optional list<Album> albums;
+  4: optional list<Playlist> playlist;
 }
 
 struct AlbumReview {

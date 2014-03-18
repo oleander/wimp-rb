@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://client.wimpmusic.com/clientapi/service
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAQAAAAZzZWFyY2gAAAAACwABAAAAD21hZG9ubmEgaHVuZyB1cAgAAgAA
+        AAAIAAMAAAAACAAEAAAAAQsABQAAABh4SVhGVHpTeFhBZUFacnNRa25lajVo
+        N0cIAAYAAAAAAA==
+    headers:
+      Content-Type:
+      - application/x-thrift
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.1.19
+      Date:
+      - Tue, 18 Mar 2014 11:49:51 GMT
+      Content-Type:
+      - application/x-thrift
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - 'Servlet 2.4; JBoss-4.0.5.GA (build: CVSTag=Branch_4_0 date=200610162339)/Tomcat-5.5'
+      Access-Control-Allow-Origin:
+      - '*'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAgAAAAZzZWFyY2gAAAAADAAADwABDAAAAAAPAAIMAAAAAQsAAQAAAAdI
+        dW5nIFVwCwACAAAAB01hZG9ubmEIAAMAADy5CAAEAAR2nAsABQAAABRIdW5n
+        IFVwIChJbnQnbCBNYXhpKQsABgAAAGUyMDA1IFdhcm5lciBCcm9zLiBSZWNv
+        cmRzIEluYy4gZm9yIHRoZSBVLlMuIGFuZCBXRUEgSW50ZXJuYXRpb25hbCBJ
+        bmMuIGZvciB0aGUgd29ybGQgb3V0c2lkZSB0aGUgVS5TLggABwAAAMsIAAsA
+        BHadCAANAAAAAQgADgAAAAELAA8AAAANUmFkaW8gVmVyc2lvbgoAEAAAAQdY
+        W6WAAgARAQIAEgEEABMAAAAAAAAAAAIAFQACABYACwAXAAAAA1MwMgsAGAAA
+        AAJFUAIAGQEIABoAAAABCAAbAADcUQgAHAAAAAAEAB0AAAAAAAAAAAwAHgsA
+        AQAAABVXYXJuZXIgQnJvcy4vTWF2ZXJpY2sIAAIAAAOTCwADAAAAA1dNRwgA
+        BAAAAVYLAAUAAAAVV2FybmVyIEJyb3MuL01hdmVyaWNrCAAGAAf0YAAIAB8A
+        AAAACgAgAAABB1hbpYALACEAAABIaHR0cDovL3dkYy5hc3Bpcm8uY29tL2Rj
+        L3BzZXI/cHJvZHVjdElkPTI5MjUwOSZjb250ZW50VHlwZUlkPTEyJmNjb2Rl
+        PVBUAgAjAAgAJAAAAEwLACUAAAB9MjAwNSBXYXJuZXIgQnJvcy4gUmVjb3Jk
+        cyBJbmMuIGZvciB0aGUgVS5TLiBhbmQgV0VBIEludGVybmF0aW9uYWwgSW5j
+        LiBmb3IgdGhlIHdvcmxkIG91dHNpZGUgdGhlIFUuUy4gLyBXYXJuZXIgQnJv
+        cy4vTWF2ZXJpY2sADwADDAAAAAAAAA==
+    http_version: 
+  recorded_at: Tue, 18 Mar 2014 11:49:53 GMT
+recorded_with: VCR 2.8.0

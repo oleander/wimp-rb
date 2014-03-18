@@ -1,271 +1,280 @@
 require "time"
 
 module WiMP
-  class Track
-    def initialize(otrack)
-      @otrack = otrack
-    end
-
+  class Track < Base
     #
     # @query String
     # @options[limit] Integer
     #
     # @return Array<Track>
     #
-    def self.search(query, options)
-      
+    def self.search(query, options =  {})
+      execute do |client|
+        client.search(
+          query, 0, 0, 
+          options.fetch(:limit, 10), 
+          WiMP.configuration.session, 0
+        ).tracks.map {|track| WiMP::Track.new(track)}
+      end
+    end
+
+    #
+    # @return String
+    #
+    def url
+      "http://wimpmusic.se/track/#{id}"
     end
 
     #
     # @return RecordLabel
     #
     def record_label
-      @otrack.recordLabel
+      @o.recordLabel
     end
 
     #
     # @return Integer
     #
     def sales_price_rule_id
-      @otrack.salesPriceRuleId
+      @o.salesPriceRuleId
     end
 
     #
     # @return Integer
     #
     def popularity_level
-      @otrack.popularityLevel
+      @o.popularityLevel
     end
 
     #
     # @return Boolean
     #
     def premium_only_streaming?
-      @otrack.premiumOnlyStreaming
+      @o.premiumOnlyStreaming
     end
 
     #
     # @return Boolean
     #
     def allow_streaming?
-      @otrack.allowStreaming
+      @o.allowStreaming
     end
 
     #
     # @return Boolean
     #
     def album_broken?
-      @otrack.albumBroken
+      @o.albumBroken
     end
 
     #
     # @return Boolean
     #
     def album_only?
-      @otrack.albumOnly
+      @o.albumOnly
     end
 
     #
     # @return Boolean
     #
     def stream_ready?
-      @otrack.streamReady
+      @o.streamReady
     end
 
     #
     # @return Boolean
     #
     def sales_ready?
-      @otrack.salesReady
+      @o.salesReady
     end
 
     #
     # @return Date
     #
     def stream_started_at
-      Time.at(@otrack.streamStartAt).to_datetime
+      Time.at(@o.streamStartDate.to_f / 1000).to_datetime
     end
 
     #
     # @return Date
     #
     def sales_started_at
-      Time.at(@otrack.salesStartAt).to_datetime
+      Time.at(@o.salesStartDate.to_f / 1000).to_datetime
     end
 
     #
     # @return Float
     #
     def price
-      @otrack.price
+      @o.price
     end
 
     #
     # @return Float
     #
     def search_score
-      @otrack.searchScore
+      @o.searchScore
     end
 
     #
     # @return Integer
     #
     def popularity_this_week
-      @otrack.popularityThisWeek
+      @o.popularityThisWeek
     end
 
     #
     # @return Integer
     #
     def popularity
-      @otrack.popularity
+      @o.popularity
     end
 
     #
     # @return Integer
     #
     def album_nr_of_volumes
-      @otrack.albumNrOfVolumes
+      @o.albumNrOfVolumes
     end
 
     #
     # @return Integer
     #
     def track_number
-      @otrack.trackNumber
+      @o.trackNumber
     end
 
     #
     # @return Integer
     #
     def volume_number
-      @otrack.volumeNumber
+      @o.volumeNumber
     end
 
     #
     # @return Integer
     #
     def id
-      @otrack.id
+      @o.id
     end
 
     #
     # @return Integer
     #
     def duration
-      @otrack.duration
+      @o.duration
     end
 
     #
     # @return Integer
     #
     def album_id
-      @otrack.albumId
+      @o.albumId
     end
 
     #
     # @return Integer
     #
     def artist_id
-      @otrack.artistId
+      @o.artistId
     end
 
     #
     # @return String
     #
     def revised_copyright
-      @otrack.revisedCopyright
+      @o.revisedCopyright
     end
 
     #
     # @return String
     #
     def customizable_album_cover
-      @otrack.customizableAlbumCover
+      @o.customizableAlbumCover
     end
 
     #
     # @return String
     #
     def preview_url
-      @otrack.previewURL
+      @o.previewURL
     end
 
     #
     # @return String
     #
     def album_calculated_type
-      @otrack.albumCalculatedType
+      @o.albumCalculatedType
     end
 
     #
     # @return String
     #
     def price_code
-      @otrack.priceCode
+      @o.priceCode
     end
 
     #
     # @return String
     #
     def currency_code
-      @otrack.currencyCode
+      @o.currencyCode
     end
 
     #
     # @return String
     #
     def version
-      @otrack.version
+      @o.version
     end
 
     #
     # @return String
     #
     def content_access_string
-      @otrack.contentAccessString
+      @o.contentAccessString
     end
 
     #
     # @return String
     #
     def large_album_cover
-      @otrack.largeAlbumCover
+      @o.largeAlbumCover
     end
 
     #
     # @return String
     #
     def medium_album_cover
-      @otrack.mediumAlbumCover
+      @o.mediumAlbumCover
     end
 
     #
     # @return String
     #
     def small_album_cover
-      @otrack.smallAlbumCover
+      @o.smallAlbumCover
     end
 
     #
     # @return String
     #
     def copyright
-      @otrack.copyright
+      @o.copyright
     end
 
     #
     # @return String
     #
     def album
-      @otrack.album
+      @o.album
     end
 
     #
     # @return String
     #
     def artist
-      @otrack.artist
+      @o.artist
     end
   end
 end

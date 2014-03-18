@@ -8,3007 +8,3009 @@ require 'thrift'
 require 'services_types'
 
 module WiMP
-  module ClientApiService
-    class Client
-      include ::Thrift::Client
-
-      def search(term, limitArtists, limitAlbums, limitTracks, sessionId, limitPlaylists)
-        send_search(term, limitArtists, limitAlbums, limitTracks, sessionId, limitPlaylists)
-        return recv_search()
-      end
-
-      def send_search(term, limitArtists, limitAlbums, limitTracks, sessionId, limitPlaylists)
-        send_message('search', Search_args, :term => term, :limitArtists => limitArtists, :limitAlbums => limitAlbums, :limitTracks => limitTracks, :sessionId => sessionId, :limitPlaylists => limitPlaylists)
-      end
-
-      def recv_search()
-        result = receive_message(Search_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'search failed: unknown result')
-      end
-
-      def addAlbumToFavorites(albumId, sessionId)
-        send_addAlbumToFavorites(albumId, sessionId)
-      end
-
-      def send_addAlbumToFavorites(albumId, sessionId)
-        send_message('addAlbumToFavorites', AddAlbumToFavorites_args, :albumId => albumId, :sessionId => sessionId)
-      end
-      def addArtistToFavorites(artistId, sessionId)
-        send_addArtistToFavorites(artistId, sessionId)
-      end
-
-      def send_addArtistToFavorites(artistId, sessionId)
-        send_message('addArtistToFavorites', AddArtistToFavorites_args, :artistId => artistId, :sessionId => sessionId)
-      end
-      def addFriend(userId, sessionId)
-        send_addFriend(userId, sessionId)
-      end
-
-      def send_addFriend(userId, sessionId)
-        send_message('addFriend', AddFriend_args, :userId => userId, :sessionId => sessionId)
-      end
-      def addPlaylistToFavorites(playlistUUID, sessionId)
-        send_addPlaylistToFavorites(playlistUUID, sessionId)
-      end
-
-      def send_addPlaylistToFavorites(playlistUUID, sessionId)
-        send_message('addPlaylistToFavorites', AddPlaylistToFavorites_args, :playlistUUID => playlistUUID, :sessionId => sessionId)
-      end
-      def addTrackToFavorites(trackId, sessionId)
-        send_addTrackToFavorites(trackId, sessionId)
-      end
-
-      def send_addTrackToFavorites(trackId, sessionId)
-        send_message('addTrackToFavorites', AddTrackToFavorites_args, :trackId => trackId, :sessionId => sessionId)
-      end
-      def addTracksToUserPlaylist(playlistUUID, tracks, position, sessionId)
-        send_addTracksToUserPlaylist(playlistUUID, tracks, position, sessionId)
-        return recv_addTracksToUserPlaylist()
-      end
-
-      def send_addTracksToUserPlaylist(playlistUUID, tracks, position, sessionId)
-        send_message('addTracksToUserPlaylist', AddTracksToUserPlaylist_args, :playlistUUID => playlistUUID, :tracks => tracks, :position => position, :sessionId => sessionId)
-      end
-
-      def recv_addTracksToUserPlaylist()
-        result = receive_message(AddTracksToUserPlaylist_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'addTracksToUserPlaylist failed: unknown result')
-      end
-
-      def addUserPlaylist(title, sessionId)
-        send_addUserPlaylist(title, sessionId)
-        return recv_addUserPlaylist()
-      end
-
-      def send_addUserPlaylist(title, sessionId)
-        send_message('addUserPlaylist', AddUserPlaylist_args, :title => title, :sessionId => sessionId)
-      end
-
-      def recv_addUserPlaylist()
-        result = receive_message(AddUserPlaylist_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'addUserPlaylist failed: unknown result')
-      end
-
-      def getAlbumById(albumId, sessionId)
-        send_getAlbumById(albumId, sessionId)
-        return recv_getAlbumById()
-      end
-
-      def send_getAlbumById(albumId, sessionId)
-        send_message('getAlbumById', GetAlbumById_args, :albumId => albumId, :sessionId => sessionId)
-      end
-
-      def recv_getAlbumById()
-        result = receive_message(GetAlbumById_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumById failed: unknown result')
-      end
-
-      def getAlbumMetaData(albumId, sessionId)
-        send_getAlbumMetaData(albumId, sessionId)
-        return recv_getAlbumMetaData()
-      end
-
-      def send_getAlbumMetaData(albumId, sessionId)
-        send_message('getAlbumMetaData', GetAlbumMetaData_args, :albumId => albumId, :sessionId => sessionId)
-      end
-
-      def recv_getAlbumMetaData()
-        result = receive_message(GetAlbumMetaData_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumMetaData failed: unknown result')
-      end
-
-      def getAlbumsByArtistId(artistId, limit, order, sessionId, filter)
-        send_getAlbumsByArtistId(artistId, limit, order, sessionId, filter)
-        return recv_getAlbumsByArtistId()
-      end
-
-      def send_getAlbumsByArtistId(artistId, limit, order, sessionId, filter)
-        send_message('getAlbumsByArtistId', GetAlbumsByArtistId_args, :artistId => artistId, :limit => limit, :order => order, :sessionId => sessionId, :filter => filter)
-      end
-
-      def recv_getAlbumsByArtistId()
-        result = receive_message(GetAlbumsByArtistId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByArtistId failed: unknown result')
-      end
-
-      def getAlbumsByArtistIdWithPaging(artistId, startIndex, limit, includeSingles, order, sessionId)
-        send_getAlbumsByArtistIdWithPaging(artistId, startIndex, limit, includeSingles, order, sessionId)
-        return recv_getAlbumsByArtistIdWithPaging()
-      end
-
-      def send_getAlbumsByArtistIdWithPaging(artistId, startIndex, limit, includeSingles, order, sessionId)
-        send_message('getAlbumsByArtistIdWithPaging', GetAlbumsByArtistIdWithPaging_args, :artistId => artistId, :startIndex => startIndex, :limit => limit, :includeSingles => includeSingles, :order => order, :sessionId => sessionId)
-      end
-
-      def recv_getAlbumsByArtistIdWithPaging()
-        result = receive_message(GetAlbumsByArtistIdWithPaging_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByArtistIdWithPaging failed: unknown result')
-      end
-
-      def getAlbumsByCategoryId(categoryId, startIndex, limit, sessionId)
-        send_getAlbumsByCategoryId(categoryId, startIndex, limit, sessionId)
-        return recv_getAlbumsByCategoryId()
-      end
-
-      def send_getAlbumsByCategoryId(categoryId, startIndex, limit, sessionId)
-        send_message('getAlbumsByCategoryId', GetAlbumsByCategoryId_args, :categoryId => categoryId, :startIndex => startIndex, :limit => limit, :sessionId => sessionId)
-      end
-
-      def recv_getAlbumsByCategoryId()
-        result = receive_message(GetAlbumsByCategoryId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByCategoryId failed: unknown result')
-      end
-
-      def getAlbumsByIds(albumIds, sessionId)
-        send_getAlbumsByIds(albumIds, sessionId)
-        return recv_getAlbumsByIds()
-      end
-
-      def send_getAlbumsByIds(albumIds, sessionId)
-        send_message('getAlbumsByIds', GetAlbumsByIds_args, :albumIds => albumIds, :sessionId => sessionId)
-      end
-
-      def recv_getAlbumsByIds()
-        result = receive_message(GetAlbumsByIds_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByIds failed: unknown result')
-      end
-
-      def getAllUserPlaylists(sessionId)
-        send_getAllUserPlaylists(sessionId)
-        return recv_getAllUserPlaylists()
-      end
-
-      def send_getAllUserPlaylists(sessionId)
-        send_message('getAllUserPlaylists', GetAllUserPlaylists_args, :sessionId => sessionId)
-      end
-
-      def recv_getAllUserPlaylists()
-        result = receive_message(GetAllUserPlaylists_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAllUserPlaylists failed: unknown result')
-      end
-
-      def getArtistById(artistId, sessionId)
-        send_getArtistById(artistId, sessionId)
-        return recv_getArtistById()
-      end
-
-      def send_getArtistById(artistId, sessionId)
-        send_message('getArtistById', GetArtistById_args, :artistId => artistId, :sessionId => sessionId)
-      end
-
-      def recv_getArtistById()
-        result = receive_message(GetArtistById_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getArtistById failed: unknown result')
-      end
-
-      def getArtistMetaData(artistId, sessionId)
-        send_getArtistMetaData(artistId, sessionId)
-        return recv_getArtistMetaData()
-      end
-
-      def send_getArtistMetaData(artistId, sessionId)
-        send_message('getArtistMetaData', GetArtistMetaData_args, :artistId => artistId, :sessionId => sessionId)
-      end
-
-      def recv_getArtistMetaData()
-        result = receive_message(GetArtistMetaData_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getArtistMetaData failed: unknown result')
-      end
-
-      def getBookletURL(albumId, sessionId)
-        send_getBookletURL(albumId, sessionId)
-        return recv_getBookletURL()
-      end
-
-      def send_getBookletURL(albumId, sessionId)
-        send_message('getBookletURL', GetBookletURL_args, :albumId => albumId, :sessionId => sessionId)
-      end
-
-      def recv_getBookletURL()
-        result = receive_message(GetBookletURL_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getBookletURL failed: unknown result')
-      end
-
-      def getCategories(categoryId, sessionId, startIndex, limit)
-        send_getCategories(categoryId, sessionId, startIndex, limit)
-        return recv_getCategories()
-      end
-
-      def send_getCategories(categoryId, sessionId, startIndex, limit)
-        send_message('getCategories', GetCategories_args, :categoryId => categoryId, :sessionId => sessionId, :startIndex => startIndex, :limit => limit)
-      end
-
-      def recv_getCategories()
-        result = receive_message(GetCategories_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getCategories failed: unknown result')
-      end
-
-      def getCategoryAndSubCategories(categoryId, depth, sessionId)
-        send_getCategoryAndSubCategories(categoryId, depth, sessionId)
-        return recv_getCategoryAndSubCategories()
-      end
-
-      def send_getCategoryAndSubCategories(categoryId, depth, sessionId)
-        send_message('getCategoryAndSubCategories', GetCategoryAndSubCategories_args, :categoryId => categoryId, :depth => depth, :sessionId => sessionId)
-      end
-
-      def recv_getCategoryAndSubCategories()
-        result = receive_message(GetCategoryAndSubCategories_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getCategoryAndSubCategories failed: unknown result')
-      end
-
-      def getCategoryById(categoryId, sessionId)
-        send_getCategoryById(categoryId, sessionId)
-        return recv_getCategoryById()
-      end
-
-      def send_getCategoryById(categoryId, sessionId)
-        send_message('getCategoryById', GetCategoryById_args, :categoryId => categoryId, :sessionId => sessionId)
-      end
-
-      def recv_getCategoryById()
-        result = receive_message(GetCategoryById_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getCategoryById failed: unknown result')
-      end
-
-      def getFavoriteAlbums(order, sessionId)
-        send_getFavoriteAlbums(order, sessionId)
-        return recv_getFavoriteAlbums()
-      end
-
-      def send_getFavoriteAlbums(order, sessionId)
-        send_message('getFavoriteAlbums', GetFavoriteAlbums_args, :order => order, :sessionId => sessionId)
-      end
-
-      def recv_getFavoriteAlbums()
-        result = receive_message(GetFavoriteAlbums_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteAlbums failed: unknown result')
-      end
-
-      def getFavoriteAlbumsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
-        send_getFavoriteAlbumsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
-        return recv_getFavoriteAlbumsByProfileId()
-      end
-
-      def send_getFavoriteAlbumsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
-        send_message('getFavoriteAlbumsByProfileId', GetFavoriteAlbumsByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessionId => sessionId)
-      end
-
-      def recv_getFavoriteAlbumsByProfileId()
-        result = receive_message(GetFavoriteAlbumsByProfileId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteAlbumsByProfileId failed: unknown result')
-      end
-
-      def getFavoriteArtists(order, sessionId)
-        send_getFavoriteArtists(order, sessionId)
-        return recv_getFavoriteArtists()
-      end
-
-      def send_getFavoriteArtists(order, sessionId)
-        send_message('getFavoriteArtists', GetFavoriteArtists_args, :order => order, :sessionId => sessionId)
-      end
-
-      def recv_getFavoriteArtists()
-        result = receive_message(GetFavoriteArtists_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteArtists failed: unknown result')
-      end
-
-      def getFavoriteArtistsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
-        send_getFavoriteArtistsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
-        return recv_getFavoriteArtistsByProfileId()
-      end
-
-      def send_getFavoriteArtistsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
-        send_message('getFavoriteArtistsByProfileId', GetFavoriteArtistsByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessionId => sessionId)
-      end
-
-      def recv_getFavoriteArtistsByProfileId()
-        result = receive_message(GetFavoriteArtistsByProfileId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteArtistsByProfileId failed: unknown result')
-      end
-
-      def getFavoritePlaylists(order, sessionId)
-        send_getFavoritePlaylists(order, sessionId)
-        return recv_getFavoritePlaylists()
-      end
-
-      def send_getFavoritePlaylists(order, sessionId)
-        send_message('getFavoritePlaylists', GetFavoritePlaylists_args, :order => order, :sessionId => sessionId)
-      end
-
-      def recv_getFavoritePlaylists()
-        result = receive_message(GetFavoritePlaylists_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoritePlaylists failed: unknown result')
-      end
-
-      def getFavoritePlaylistsByProfileId(profileId, paramPrivacyLevel, order, sessonId)
-        send_getFavoritePlaylistsByProfileId(profileId, paramPrivacyLevel, order, sessonId)
-        return recv_getFavoritePlaylistsByProfileId()
-      end
-
-      def send_getFavoritePlaylistsByProfileId(profileId, paramPrivacyLevel, order, sessonId)
-        send_message('getFavoritePlaylistsByProfileId', GetFavoritePlaylistsByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessonId => sessonId)
-      end
-
-      def recv_getFavoritePlaylistsByProfileId()
-        result = receive_message(GetFavoritePlaylistsByProfileId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoritePlaylistsByProfileId failed: unknown result')
-      end
-
-      def getFavoriteTracks(order, sessonId)
-        send_getFavoriteTracks(order, sessonId)
-        return recv_getFavoriteTracks()
-      end
-
-      def send_getFavoriteTracks(order, sessonId)
-        send_message('getFavoriteTracks', GetFavoriteTracks_args, :order => order, :sessonId => sessonId)
-      end
-
-      def recv_getFavoriteTracks()
-        result = receive_message(GetFavoriteTracks_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteTracks failed: unknown result')
-      end
-
-      def getFavoriteTracksByProfileId(profileId, paramPrivacyLevel, order, sessonId)
-        send_getFavoriteTracksByProfileId(profileId, paramPrivacyLevel, order, sessonId)
-        return recv_getFavoriteTracksByProfileId()
-      end
-
-      def send_getFavoriteTracksByProfileId(profileId, paramPrivacyLevel, order, sessonId)
-        send_message('getFavoriteTracksByProfileId', GetFavoriteTracksByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessonId => sessonId)
-      end
-
-      def recv_getFavoriteTracksByProfileId()
-        result = receive_message(GetFavoriteTracksByProfileId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteTracksByProfileId failed: unknown result')
-      end
-
-      def getWallPosts(profileId, startIndex, offset, sessonId)
-        send_getWallPosts(profileId, startIndex, offset, sessonId)
-        return recv_getWallPosts()
-      end
-
-      def send_getWallPosts(profileId, startIndex, offset, sessonId)
-        send_message('getWallPosts', GetWallPosts_args, :profileId => profileId, :startIndex => startIndex, :offset => offset, :sessonId => sessonId)
-      end
-
-      def recv_getWallPosts()
-        result = receive_message(GetWallPosts_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getWallPosts failed: unknown result')
-      end
-
-      def getFriends(sessonId)
-        send_getFriends(sessonId)
-        return recv_getFriends()
-      end
-
-      def send_getFriends(sessonId)
-        send_message('getFriends', GetFriends_args, :sessonId => sessonId)
-      end
-
-      def recv_getFriends()
-        result = receive_message(GetFriends_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFriends failed: unknown result')
-      end
-
-      def getLastUpdatedFavAlbum(sessonId)
-        send_getLastUpdatedFavAlbum(sessonId)
-        return recv_getLastUpdatedFavAlbum()
-      end
-
-      def send_getLastUpdatedFavAlbum(sessonId)
-        send_message('getLastUpdatedFavAlbum', GetLastUpdatedFavAlbum_args, :sessonId => sessonId)
-      end
-
-      def recv_getLastUpdatedFavAlbum()
-        result = receive_message(GetLastUpdatedFavAlbum_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavAlbum failed: unknown result')
-      end
-
-      def getLastUpdatedFavArtist(sessonId)
-        send_getLastUpdatedFavArtist(sessonId)
-        return recv_getLastUpdatedFavArtist()
-      end
-
-      def send_getLastUpdatedFavArtist(sessonId)
-        send_message('getLastUpdatedFavArtist', GetLastUpdatedFavArtist_args, :sessonId => sessonId)
-      end
-
-      def recv_getLastUpdatedFavArtist()
-        result = receive_message(GetLastUpdatedFavArtist_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavArtist failed: unknown result')
-      end
-
-      def getLastUpdatedFavPlaylist(sessonId)
-        send_getLastUpdatedFavPlaylist(sessonId)
-        return recv_getLastUpdatedFavPlaylist()
-      end
-
-      def send_getLastUpdatedFavPlaylist(sessonId)
-        send_message('getLastUpdatedFavPlaylist', GetLastUpdatedFavPlaylist_args, :sessonId => sessonId)
-      end
-
-      def recv_getLastUpdatedFavPlaylist()
-        result = receive_message(GetLastUpdatedFavPlaylist_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavPlaylist failed: unknown result')
-      end
-
-      def getLastUpdatedFavTrack(sessonId)
-        send_getLastUpdatedFavTrack(sessonId)
-        return recv_getLastUpdatedFavTrack()
-      end
-
-      def send_getLastUpdatedFavTrack(sessonId)
-        send_message('getLastUpdatedFavTrack', GetLastUpdatedFavTrack_args, :sessonId => sessonId)
-      end
-
-      def recv_getLastUpdatedFavTrack()
-        result = receive_message(GetLastUpdatedFavTrack_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavTrack failed: unknown result')
-      end
-
-      def getLastUpdatedPlaylist(sessonId)
-        send_getLastUpdatedPlaylist(sessonId)
-        return recv_getLastUpdatedPlaylist()
-      end
-
-      def send_getLastUpdatedPlaylist(sessonId)
-        send_message('getLastUpdatedPlaylist', GetLastUpdatedPlaylist_args, :sessonId => sessonId)
-      end
-
-      def recv_getLastUpdatedPlaylist()
-        result = receive_message(GetLastUpdatedPlaylist_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedPlaylist failed: unknown result')
-      end
-
-      def getPlaylistsByCategoryId(categoryId, startIndex, limit, sessonId)
-        send_getPlaylistsByCategoryId(categoryId, startIndex, limit, sessonId)
-        return recv_getPlaylistsByCategoryId()
-      end
-
-      def send_getPlaylistsByCategoryId(categoryId, startIndex, limit, sessonId)
-        send_message('getPlaylistsByCategoryId', GetPlaylistsByCategoryId_args, :categoryId => categoryId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_getPlaylistsByCategoryId()
-        result = receive_message(GetPlaylistsByCategoryId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getPlaylistsByCategoryId failed: unknown result')
-      end
-
-      def getProfileTrackPlayListsByArtistId(artistId, startIndex, limit, sessonId)
-        send_getProfileTrackPlayListsByArtistId(artistId, startIndex, limit, sessonId)
-        return recv_getProfileTrackPlayListsByArtistId()
-      end
-
-      def send_getProfileTrackPlayListsByArtistId(artistId, startIndex, limit, sessonId)
-        send_message('getProfileTrackPlayListsByArtistId', GetProfileTrackPlayListsByArtistId_args, :artistId => artistId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_getProfileTrackPlayListsByArtistId()
-        result = receive_message(GetProfileTrackPlayListsByArtistId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getProfileTrackPlayListsByArtistId failed: unknown result')
-      end
-
-      def getProfileTrackPlayListsInclidingArtistId(artistId, startIndex, limit, sessonId)
-        send_getProfileTrackPlayListsInclidingArtistId(artistId, startIndex, limit, sessonId)
-        return recv_getProfileTrackPlayListsInclidingArtistId()
-      end
-
-      def send_getProfileTrackPlayListsInclidingArtistId(artistId, startIndex, limit, sessonId)
-        send_message('getProfileTrackPlayListsInclidingArtistId', GetProfileTrackPlayListsInclidingArtistId_args, :artistId => artistId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_getProfileTrackPlayListsInclidingArtistId()
-        result = receive_message(GetProfileTrackPlayListsInclidingArtistId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getProfileTrackPlayListsInclidingArtistId failed: unknown result')
-      end
-
-      def getTopTracksByArtistId(artistId, limit, onlyAsMainArtist, sessonId)
-        send_getTopTracksByArtistId(artistId, limit, onlyAsMainArtist, sessonId)
-        return recv_getTopTracksByArtistId()
-      end
-
-      def send_getTopTracksByArtistId(artistId, limit, onlyAsMainArtist, sessonId)
-        send_message('getTopTracksByArtistId', GetTopTracksByArtistId_args, :artistId => artistId, :limit => limit, :onlyAsMainArtist => onlyAsMainArtist, :sessonId => sessonId)
-      end
-
-      def recv_getTopTracksByArtistId()
-        result = receive_message(GetTopTracksByArtistId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTopTracksByArtistId failed: unknown result')
-      end
-
-      def getTrackById(trackId, sessonId)
-        send_getTrackById(trackId, sessonId)
-        return recv_getTrackById()
-      end
-
-      def send_getTrackById(trackId, sessonId)
-        send_message('getTrackById', GetTrackById_args, :trackId => trackId, :sessonId => sessonId)
-      end
-
-      def recv_getTrackById()
-        result = receive_message(GetTrackById_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTrackById failed: unknown result')
-      end
-
-      def getTracksByAlbumId(albumId, sessonId)
-        send_getTracksByAlbumId(albumId, sessonId)
-        return recv_getTracksByAlbumId()
-      end
-
-      def send_getTracksByAlbumId(albumId, sessonId)
-        send_message('getTracksByAlbumId', GetTracksByAlbumId_args, :albumId => albumId, :sessonId => sessonId)
-      end
-
-      def recv_getTracksByAlbumId()
-        result = receive_message(GetTracksByAlbumId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTracksByAlbumId failed: unknown result')
-      end
-
-      def getTracksByCategoryId(categoryId, startIndex, limit, sessonId)
-        send_getTracksByCategoryId(categoryId, startIndex, limit, sessonId)
-        return recv_getTracksByCategoryId()
-      end
-
-      def send_getTracksByCategoryId(categoryId, startIndex, limit, sessonId)
-        send_message('getTracksByCategoryId', GetTracksByCategoryId_args, :categoryId => categoryId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_getTracksByCategoryId()
-        result = receive_message(GetTracksByCategoryId_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTracksByCategoryId failed: unknown result')
-      end
-
-      def getUserPlaylistByUuid(uuid, sessonId)
-        send_getUserPlaylistByUuid(uuid, sessonId)
-        return recv_getUserPlaylistByUuid()
-      end
-
-      def send_getUserPlaylistByUuid(uuid, sessonId)
-        send_message('getUserPlaylistByUuid', GetUserPlaylistByUuid_args, :uuid => uuid, :sessonId => sessonId)
-      end
-
-      def recv_getUserPlaylistByUuid()
-        result = receive_message(GetUserPlaylistByUuid_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getUserPlaylistByUuid failed: unknown result')
-      end
-
-      def getUserPlaylistsByType(type, startIndex, limit, sessonId)
-        send_getUserPlaylistsByType(type, startIndex, limit, sessonId)
-        return recv_getUserPlaylistsByType()
-      end
-
-      def send_getUserPlaylistsByType(type, startIndex, limit, sessonId)
-        send_message('getUserPlaylistsByType', GetUserPlaylistsByType_args, :type => type, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_getUserPlaylistsByType()
-        result = receive_message(GetUserPlaylistsByType_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getUserPlaylistsByType failed: unknown result')
-      end
-
-      def getUserPlaylistsByUuids(uuids, sessonId)
-        send_getUserPlaylistsByUuids(uuids, sessonId)
-        return recv_getUserPlaylistsByUuids()
-      end
-
-      def send_getUserPlaylistsByUuids(uuids, sessonId)
-        send_message('getUserPlaylistsByUuids', GetUserPlaylistsByUuids_args, :uuids => uuids, :sessonId => sessonId)
-      end
-
-      def recv_getUserPlaylistsByUuids()
-        result = receive_message(GetUserPlaylistsByUuids_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getUserPlaylistsByUuids failed: unknown result')
-      end
-
-      def moveUserPlaylistTracks(uuid, fromIndex, toIndex, sessonId)
-        send_moveUserPlaylistTracks(uuid, fromIndex, toIndex, sessonId)
-        return recv_moveUserPlaylistTracks()
-      end
-
-      def send_moveUserPlaylistTracks(uuid, fromIndex, toIndex, sessonId)
-        send_message('moveUserPlaylistTracks', MoveUserPlaylistTracks_args, :uuid => uuid, :fromIndex => fromIndex, :toIndex => toIndex, :sessonId => sessonId)
-      end
-
-      def recv_moveUserPlaylistTracks()
-        result = receive_message(MoveUserPlaylistTracks_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'moveUserPlaylistTracks failed: unknown result')
-      end
-
-      def removeUserPlaylistByUuid(uuid, sessonId)
-        send_removeUserPlaylistByUuid(uuid, sessonId)
-        return recv_removeUserPlaylistByUuid()
-      end
-
-      def send_removeUserPlaylistByUuid(uuid, sessonId)
-        send_message('removeUserPlaylistByUuid', RemoveUserPlaylistByUuid_args, :uuid => uuid, :sessonId => sessonId)
-      end
-
-      def recv_removeUserPlaylistByUuid()
-        result = receive_message(RemoveUserPlaylistByUuid_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'removeUserPlaylistByUuid failed: unknown result')
-      end
-
-      def removeUserPlaylistTracks(uuid, indices, sessonId)
-        send_removeUserPlaylistTracks(uuid, indices, sessonId)
-        return recv_removeUserPlaylistTracks()
-      end
-
-      def send_removeUserPlaylistTracks(uuid, indices, sessonId)
-        send_message('removeUserPlaylistTracks', RemoveUserPlaylistTracks_args, :uuid => uuid, :indices => indices, :sessonId => sessonId)
-      end
-
-      def recv_removeUserPlaylistTracks()
-        result = receive_message(RemoveUserPlaylistTracks_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'removeUserPlaylistTracks failed: unknown result')
-      end
-
-      def renameUserPlaylistByUuid(uuid, title, sessonId)
-        send_renameUserPlaylistByUuid(uuid, title, sessonId)
-        return recv_renameUserPlaylistByUuid()
-      end
-
-      def send_renameUserPlaylistByUuid(uuid, title, sessonId)
-        send_message('renameUserPlaylistByUuid', RenameUserPlaylistByUuid_args, :uuid => uuid, :title => title, :sessonId => sessonId)
-      end
-
-      def recv_renameUserPlaylistByUuid()
-        result = receive_message(RenameUserPlaylistByUuid_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'renameUserPlaylistByUuid failed: unknown result')
-      end
-
-      def suggestTracksByArtistIds(artistIds, limit, sessonId)
-        send_suggestTracksByArtistIds(artistIds, limit, sessonId)
-        return recv_suggestTracksByArtistIds()
-      end
-
-      def send_suggestTracksByArtistIds(artistIds, limit, sessonId)
-        send_message('suggestTracksByArtistIds', SuggestTracksByArtistIds_args, :artistIds => artistIds, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_suggestTracksByArtistIds()
-        result = receive_message(SuggestTracksByArtistIds_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'suggestTracksByArtistIds failed: unknown result')
-      end
-
-      def suggestTracksByTrackIds(trackIds, limit, sessonId)
-        send_suggestTracksByTrackIds(trackIds, limit, sessonId)
-        return recv_suggestTracksByTrackIds()
-      end
-
-      def send_suggestTracksByTrackIds(trackIds, limit, sessonId)
-        send_message('suggestTracksByTrackIds', SuggestTracksByTrackIds_args, :trackIds => trackIds, :limit => limit, :sessonId => sessonId)
-      end
-
-      def recv_suggestTracksByTrackIds()
-        result = receive_message(SuggestTracksByTrackIds_result)
-        return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'suggestTracksByTrackIds failed: unknown result')
-      end
-
-    end
-
-    class Processor
-      include ::Thrift::Processor
-
-      def process_search(seqid, iprot, oprot)
-        args = read_args(iprot, Search_args)
-        result = Search_result.new()
-        result.success = @handler.search(args.term, args.limitArtists, args.limitAlbums, args.limitTracks, args.sessionId, args.limitPlaylists)
-        write_result(result, oprot, 'search', seqid)
-      end
-
-      def process_addAlbumToFavorites(seqid, iprot, oprot)
-        args = read_args(iprot, AddAlbumToFavorites_args)
-        @handler.addAlbumToFavorites(args.albumId, args.sessionId)
-        return
-      end
-
-      def process_addArtistToFavorites(seqid, iprot, oprot)
-        args = read_args(iprot, AddArtistToFavorites_args)
-        @handler.addArtistToFavorites(args.artistId, args.sessionId)
-        return
-      end
-
-      def process_addFriend(seqid, iprot, oprot)
-        args = read_args(iprot, AddFriend_args)
-        @handler.addFriend(args.userId, args.sessionId)
-        return
-      end
-
-      def process_addPlaylistToFavorites(seqid, iprot, oprot)
-        args = read_args(iprot, AddPlaylistToFavorites_args)
-        @handler.addPlaylistToFavorites(args.playlistUUID, args.sessionId)
-        return
-      end
-
-      def process_addTrackToFavorites(seqid, iprot, oprot)
-        args = read_args(iprot, AddTrackToFavorites_args)
-        @handler.addTrackToFavorites(args.trackId, args.sessionId)
-        return
-      end
-
-      def process_addTracksToUserPlaylist(seqid, iprot, oprot)
-        args = read_args(iprot, AddTracksToUserPlaylist_args)
-        result = AddTracksToUserPlaylist_result.new()
-        result.success = @handler.addTracksToUserPlaylist(args.playlistUUID, args.tracks, args.position, args.sessionId)
-        write_result(result, oprot, 'addTracksToUserPlaylist', seqid)
-      end
-
-      def process_addUserPlaylist(seqid, iprot, oprot)
-        args = read_args(iprot, AddUserPlaylist_args)
-        result = AddUserPlaylist_result.new()
-        result.success = @handler.addUserPlaylist(args.title, args.sessionId)
-        write_result(result, oprot, 'addUserPlaylist', seqid)
-      end
-
-      def process_getAlbumById(seqid, iprot, oprot)
-        args = read_args(iprot, GetAlbumById_args)
-        result = GetAlbumById_result.new()
-        result.success = @handler.getAlbumById(args.albumId, args.sessionId)
-        write_result(result, oprot, 'getAlbumById', seqid)
-      end
-
-      def process_getAlbumMetaData(seqid, iprot, oprot)
-        args = read_args(iprot, GetAlbumMetaData_args)
-        result = GetAlbumMetaData_result.new()
-        result.success = @handler.getAlbumMetaData(args.albumId, args.sessionId)
-        write_result(result, oprot, 'getAlbumMetaData', seqid)
-      end
-
-      def process_getAlbumsByArtistId(seqid, iprot, oprot)
-        args = read_args(iprot, GetAlbumsByArtistId_args)
-        result = GetAlbumsByArtistId_result.new()
-        result.success = @handler.getAlbumsByArtistId(args.artistId, args.limit, args.order, args.sessionId, args.filter)
-        write_result(result, oprot, 'getAlbumsByArtistId', seqid)
-      end
-
-      def process_getAlbumsByArtistIdWithPaging(seqid, iprot, oprot)
-        args = read_args(iprot, GetAlbumsByArtistIdWithPaging_args)
-        result = GetAlbumsByArtistIdWithPaging_result.new()
-        result.success = @handler.getAlbumsByArtistIdWithPaging(args.artistId, args.startIndex, args.limit, args.includeSingles, args.order, args.sessionId)
-        write_result(result, oprot, 'getAlbumsByArtistIdWithPaging', seqid)
-      end
-
-      def process_getAlbumsByCategoryId(seqid, iprot, oprot)
-        args = read_args(iprot, GetAlbumsByCategoryId_args)
-        result = GetAlbumsByCategoryId_result.new()
-        result.success = @handler.getAlbumsByCategoryId(args.categoryId, args.startIndex, args.limit, args.sessionId)
-        write_result(result, oprot, 'getAlbumsByCategoryId', seqid)
-      end
-
-      def process_getAlbumsByIds(seqid, iprot, oprot)
-        args = read_args(iprot, GetAlbumsByIds_args)
-        result = GetAlbumsByIds_result.new()
-        result.success = @handler.getAlbumsByIds(args.albumIds, args.sessionId)
-        write_result(result, oprot, 'getAlbumsByIds', seqid)
-      end
-
-      def process_getAllUserPlaylists(seqid, iprot, oprot)
-        args = read_args(iprot, GetAllUserPlaylists_args)
-        result = GetAllUserPlaylists_result.new()
-        result.success = @handler.getAllUserPlaylists(args.sessionId)
-        write_result(result, oprot, 'getAllUserPlaylists', seqid)
-      end
-
-      def process_getArtistById(seqid, iprot, oprot)
-        args = read_args(iprot, GetArtistById_args)
-        result = GetArtistById_result.new()
-        result.success = @handler.getArtistById(args.artistId, args.sessionId)
-        write_result(result, oprot, 'getArtistById', seqid)
-      end
-
-      def process_getArtistMetaData(seqid, iprot, oprot)
-        args = read_args(iprot, GetArtistMetaData_args)
-        result = GetArtistMetaData_result.new()
-        result.success = @handler.getArtistMetaData(args.artistId, args.sessionId)
-        write_result(result, oprot, 'getArtistMetaData', seqid)
-      end
-
-      def process_getBookletURL(seqid, iprot, oprot)
-        args = read_args(iprot, GetBookletURL_args)
-        result = GetBookletURL_result.new()
-        result.success = @handler.getBookletURL(args.albumId, args.sessionId)
-        write_result(result, oprot, 'getBookletURL', seqid)
-      end
-
-      def process_getCategories(seqid, iprot, oprot)
-        args = read_args(iprot, GetCategories_args)
-        result = GetCategories_result.new()
-        result.success = @handler.getCategories(args.categoryId, args.sessionId, args.startIndex, args.limit)
-        write_result(result, oprot, 'getCategories', seqid)
-      end
-
-      def process_getCategoryAndSubCategories(seqid, iprot, oprot)
-        args = read_args(iprot, GetCategoryAndSubCategories_args)
-        result = GetCategoryAndSubCategories_result.new()
-        result.success = @handler.getCategoryAndSubCategories(args.categoryId, args.depth, args.sessionId)
-        write_result(result, oprot, 'getCategoryAndSubCategories', seqid)
-      end
-
-      def process_getCategoryById(seqid, iprot, oprot)
-        args = read_args(iprot, GetCategoryById_args)
-        result = GetCategoryById_result.new()
-        result.success = @handler.getCategoryById(args.categoryId, args.sessionId)
-        write_result(result, oprot, 'getCategoryById', seqid)
-      end
-
-      def process_getFavoriteAlbums(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoriteAlbums_args)
-        result = GetFavoriteAlbums_result.new()
-        result.success = @handler.getFavoriteAlbums(args.order, args.sessionId)
-        write_result(result, oprot, 'getFavoriteAlbums', seqid)
-      end
-
-      def process_getFavoriteAlbumsByProfileId(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoriteAlbumsByProfileId_args)
-        result = GetFavoriteAlbumsByProfileId_result.new()
-        result.success = @handler.getFavoriteAlbumsByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessionId)
-        write_result(result, oprot, 'getFavoriteAlbumsByProfileId', seqid)
-      end
-
-      def process_getFavoriteArtists(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoriteArtists_args)
-        result = GetFavoriteArtists_result.new()
-        result.success = @handler.getFavoriteArtists(args.order, args.sessionId)
-        write_result(result, oprot, 'getFavoriteArtists', seqid)
-      end
-
-      def process_getFavoriteArtistsByProfileId(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoriteArtistsByProfileId_args)
-        result = GetFavoriteArtistsByProfileId_result.new()
-        result.success = @handler.getFavoriteArtistsByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessionId)
-        write_result(result, oprot, 'getFavoriteArtistsByProfileId', seqid)
-      end
-
-      def process_getFavoritePlaylists(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoritePlaylists_args)
-        result = GetFavoritePlaylists_result.new()
-        result.success = @handler.getFavoritePlaylists(args.order, args.sessionId)
-        write_result(result, oprot, 'getFavoritePlaylists', seqid)
-      end
-
-      def process_getFavoritePlaylistsByProfileId(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoritePlaylistsByProfileId_args)
-        result = GetFavoritePlaylistsByProfileId_result.new()
-        result.success = @handler.getFavoritePlaylistsByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessonId)
-        write_result(result, oprot, 'getFavoritePlaylistsByProfileId', seqid)
-      end
-
-      def process_getFavoriteTracks(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoriteTracks_args)
-        result = GetFavoriteTracks_result.new()
-        result.success = @handler.getFavoriteTracks(args.order, args.sessonId)
-        write_result(result, oprot, 'getFavoriteTracks', seqid)
-      end
-
-      def process_getFavoriteTracksByProfileId(seqid, iprot, oprot)
-        args = read_args(iprot, GetFavoriteTracksByProfileId_args)
-        result = GetFavoriteTracksByProfileId_result.new()
-        result.success = @handler.getFavoriteTracksByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessonId)
-        write_result(result, oprot, 'getFavoriteTracksByProfileId', seqid)
-      end
-
-      def process_getWallPosts(seqid, iprot, oprot)
-        args = read_args(iprot, GetWallPosts_args)
-        result = GetWallPosts_result.new()
-        result.success = @handler.getWallPosts(args.profileId, args.startIndex, args.offset, args.sessonId)
-        write_result(result, oprot, 'getWallPosts', seqid)
-      end
-
-      def process_getFriends(seqid, iprot, oprot)
-        args = read_args(iprot, GetFriends_args)
-        result = GetFriends_result.new()
-        result.success = @handler.getFriends(args.sessonId)
-        write_result(result, oprot, 'getFriends', seqid)
-      end
-
-      def process_getLastUpdatedFavAlbum(seqid, iprot, oprot)
-        args = read_args(iprot, GetLastUpdatedFavAlbum_args)
-        result = GetLastUpdatedFavAlbum_result.new()
-        result.success = @handler.getLastUpdatedFavAlbum(args.sessonId)
-        write_result(result, oprot, 'getLastUpdatedFavAlbum', seqid)
-      end
-
-      def process_getLastUpdatedFavArtist(seqid, iprot, oprot)
-        args = read_args(iprot, GetLastUpdatedFavArtist_args)
-        result = GetLastUpdatedFavArtist_result.new()
-        result.success = @handler.getLastUpdatedFavArtist(args.sessonId)
-        write_result(result, oprot, 'getLastUpdatedFavArtist', seqid)
-      end
-
-      def process_getLastUpdatedFavPlaylist(seqid, iprot, oprot)
-        args = read_args(iprot, GetLastUpdatedFavPlaylist_args)
-        result = GetLastUpdatedFavPlaylist_result.new()
-        result.success = @handler.getLastUpdatedFavPlaylist(args.sessonId)
-        write_result(result, oprot, 'getLastUpdatedFavPlaylist', seqid)
-      end
-
-      def process_getLastUpdatedFavTrack(seqid, iprot, oprot)
-        args = read_args(iprot, GetLastUpdatedFavTrack_args)
-        result = GetLastUpdatedFavTrack_result.new()
-        result.success = @handler.getLastUpdatedFavTrack(args.sessonId)
-        write_result(result, oprot, 'getLastUpdatedFavTrack', seqid)
-      end
-
-      def process_getLastUpdatedPlaylist(seqid, iprot, oprot)
-        args = read_args(iprot, GetLastUpdatedPlaylist_args)
-        result = GetLastUpdatedPlaylist_result.new()
-        result.success = @handler.getLastUpdatedPlaylist(args.sessonId)
-        write_result(result, oprot, 'getLastUpdatedPlaylist', seqid)
-      end
-
-      def process_getPlaylistsByCategoryId(seqid, iprot, oprot)
-        args = read_args(iprot, GetPlaylistsByCategoryId_args)
-        result = GetPlaylistsByCategoryId_result.new()
-        result.success = @handler.getPlaylistsByCategoryId(args.categoryId, args.startIndex, args.limit, args.sessonId)
-        write_result(result, oprot, 'getPlaylistsByCategoryId', seqid)
-      end
-
-      def process_getProfileTrackPlayListsByArtistId(seqid, iprot, oprot)
-        args = read_args(iprot, GetProfileTrackPlayListsByArtistId_args)
-        result = GetProfileTrackPlayListsByArtistId_result.new()
-        result.success = @handler.getProfileTrackPlayListsByArtistId(args.artistId, args.startIndex, args.limit, args.sessonId)
-        write_result(result, oprot, 'getProfileTrackPlayListsByArtistId', seqid)
-      end
-
-      def process_getProfileTrackPlayListsInclidingArtistId(seqid, iprot, oprot)
-        args = read_args(iprot, GetProfileTrackPlayListsInclidingArtistId_args)
-        result = GetProfileTrackPlayListsInclidingArtistId_result.new()
-        result.success = @handler.getProfileTrackPlayListsInclidingArtistId(args.artistId, args.startIndex, args.limit, args.sessonId)
-        write_result(result, oprot, 'getProfileTrackPlayListsInclidingArtistId', seqid)
-      end
-
-      def process_getTopTracksByArtistId(seqid, iprot, oprot)
-        args = read_args(iprot, GetTopTracksByArtistId_args)
-        result = GetTopTracksByArtistId_result.new()
-        result.success = @handler.getTopTracksByArtistId(args.artistId, args.limit, args.onlyAsMainArtist, args.sessonId)
-        write_result(result, oprot, 'getTopTracksByArtistId', seqid)
-      end
-
-      def process_getTrackById(seqid, iprot, oprot)
-        args = read_args(iprot, GetTrackById_args)
-        result = GetTrackById_result.new()
-        result.success = @handler.getTrackById(args.trackId, args.sessonId)
-        write_result(result, oprot, 'getTrackById', seqid)
-      end
-
-      def process_getTracksByAlbumId(seqid, iprot, oprot)
-        args = read_args(iprot, GetTracksByAlbumId_args)
-        result = GetTracksByAlbumId_result.new()
-        result.success = @handler.getTracksByAlbumId(args.albumId, args.sessonId)
-        write_result(result, oprot, 'getTracksByAlbumId', seqid)
-      end
-
-      def process_getTracksByCategoryId(seqid, iprot, oprot)
-        args = read_args(iprot, GetTracksByCategoryId_args)
-        result = GetTracksByCategoryId_result.new()
-        result.success = @handler.getTracksByCategoryId(args.categoryId, args.startIndex, args.limit, args.sessonId)
-        write_result(result, oprot, 'getTracksByCategoryId', seqid)
-      end
-
-      def process_getUserPlaylistByUuid(seqid, iprot, oprot)
-        args = read_args(iprot, GetUserPlaylistByUuid_args)
-        result = GetUserPlaylistByUuid_result.new()
-        result.success = @handler.getUserPlaylistByUuid(args.uuid, args.sessonId)
-        write_result(result, oprot, 'getUserPlaylistByUuid', seqid)
-      end
-
-      def process_getUserPlaylistsByType(seqid, iprot, oprot)
-        args = read_args(iprot, GetUserPlaylistsByType_args)
-        result = GetUserPlaylistsByType_result.new()
-        result.success = @handler.getUserPlaylistsByType(args.type, args.startIndex, args.limit, args.sessonId)
-        write_result(result, oprot, 'getUserPlaylistsByType', seqid)
-      end
-
-      def process_getUserPlaylistsByUuids(seqid, iprot, oprot)
-        args = read_args(iprot, GetUserPlaylistsByUuids_args)
-        result = GetUserPlaylistsByUuids_result.new()
-        result.success = @handler.getUserPlaylistsByUuids(args.uuids, args.sessonId)
-        write_result(result, oprot, 'getUserPlaylistsByUuids', seqid)
-      end
-
-      def process_moveUserPlaylistTracks(seqid, iprot, oprot)
-        args = read_args(iprot, MoveUserPlaylistTracks_args)
-        result = MoveUserPlaylistTracks_result.new()
-        result.success = @handler.moveUserPlaylistTracks(args.uuid, args.fromIndex, args.toIndex, args.sessonId)
-        write_result(result, oprot, 'moveUserPlaylistTracks', seqid)
-      end
-
-      def process_removeUserPlaylistByUuid(seqid, iprot, oprot)
-        args = read_args(iprot, RemoveUserPlaylistByUuid_args)
-        result = RemoveUserPlaylistByUuid_result.new()
-        result.success = @handler.removeUserPlaylistByUuid(args.uuid, args.sessonId)
-        write_result(result, oprot, 'removeUserPlaylistByUuid', seqid)
-      end
-
-      def process_removeUserPlaylistTracks(seqid, iprot, oprot)
-        args = read_args(iprot, RemoveUserPlaylistTracks_args)
-        result = RemoveUserPlaylistTracks_result.new()
-        result.success = @handler.removeUserPlaylistTracks(args.uuid, args.indices, args.sessonId)
-        write_result(result, oprot, 'removeUserPlaylistTracks', seqid)
-      end
-
-      def process_renameUserPlaylistByUuid(seqid, iprot, oprot)
-        args = read_args(iprot, RenameUserPlaylistByUuid_args)
-        result = RenameUserPlaylistByUuid_result.new()
-        result.success = @handler.renameUserPlaylistByUuid(args.uuid, args.title, args.sessonId)
-        write_result(result, oprot, 'renameUserPlaylistByUuid', seqid)
-      end
-
-      def process_suggestTracksByArtistIds(seqid, iprot, oprot)
-        args = read_args(iprot, SuggestTracksByArtistIds_args)
-        result = SuggestTracksByArtistIds_result.new()
-        result.success = @handler.suggestTracksByArtistIds(args.artistIds, args.limit, args.sessonId)
-        write_result(result, oprot, 'suggestTracksByArtistIds', seqid)
-      end
-
-      def process_suggestTracksByTrackIds(seqid, iprot, oprot)
-        args = read_args(iprot, SuggestTracksByTrackIds_args)
-        result = SuggestTracksByTrackIds_result.new()
-        result.success = @handler.suggestTracksByTrackIds(args.trackIds, args.limit, args.sessonId)
-        write_result(result, oprot, 'suggestTracksByTrackIds', seqid)
-      end
-
-    end
-
-    # HELPER FUNCTIONS AND STRUCTURES
-
-    class Search_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      TERM = 1
-      LIMITARTISTS = 2
-      LIMITALBUMS = 3
-      LIMITTRACKS = 4
-      SESSIONID = 5
-      LIMITPLAYLISTS = 6
-
-      FIELDS = {
-        TERM => {:type => ::Thrift::Types::STRING, :name => 'term'},
-        LIMITARTISTS => {:type => ::Thrift::Types::I32, :name => 'limitArtists'},
-        LIMITALBUMS => {:type => ::Thrift::Types::I32, :name => 'limitAlbums'},
-        LIMITTRACKS => {:type => ::Thrift::Types::I32, :name => 'limitTracks'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'},
-        LIMITPLAYLISTS => {:type => ::Thrift::Types::I32, :name => 'limitPlaylists'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class Search_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::SearchResult}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddAlbumToFavorites_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ALBUMID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddAlbumToFavorites_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-
-      FIELDS = {
-
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddArtistToFavorites_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddArtistToFavorites_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-
-      FIELDS = {
-
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddFriend_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      USERID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        USERID => {:type => ::Thrift::Types::I32, :name => 'userId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddFriend_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-
-      FIELDS = {
-
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddPlaylistToFavorites_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PLAYLISTUUID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        PLAYLISTUUID => {:type => ::Thrift::Types::STRING, :name => 'playlistUUID'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddPlaylistToFavorites_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-
-      FIELDS = {
-
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddTrackToFavorites_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      TRACKID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        TRACKID => {:type => ::Thrift::Types::I32, :name => 'trackId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddTrackToFavorites_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-
-      FIELDS = {
-
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddTracksToUserPlaylist_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PLAYLISTUUID = 1
-      TRACKS = 2
-      POSITION = 3
-      SESSIONID = 4
-
-      FIELDS = {
-        PLAYLISTUUID => {:type => ::Thrift::Types::STRING, :name => 'playlistUUID'},
-        TRACKS => {:type => ::Thrift::Types::LIST, :name => 'tracks', :element => {:type => ::Thrift::Types::I32}},
-        POSITION => {:type => ::Thrift::Types::I32, :name => 'position'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddTracksToUserPlaylist_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddUserPlaylist_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      TITLE = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        TITLE => {:type => ::Thrift::Types::STRING, :name => 'title'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class AddUserPlaylist_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Playlist}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumById_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ALBUMID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumById_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Album}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumMetaData_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ALBUMID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumMetaData_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::AlbumMetadata}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByArtistId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      LIMIT = 2
-      ORDER = 3
-      SESSIONID = 4
-      FILTER = 5
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::AlbumOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'},
-        FILTER => {:type => ::Thrift::Types::I32, :name => 'filter', :enum_class => ::WiMP::AlbumFilter}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @order.nil? || ::WiMP::AlbumOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+  module Gen
+    module ClientApiService
+      class Client
+        include ::Thrift::Client
+
+        def search(term, limitArtists, limitAlbums, limitTracks, sessionId, limitPlaylists)
+          send_search(term, limitArtists, limitAlbums, limitTracks, sessionId, limitPlaylists)
+          return recv_search()
         end
-        unless @filter.nil? || ::WiMP::AlbumFilter::VALID_VALUES.include?(@filter)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field filter!')
+
+        def send_search(term, limitArtists, limitAlbums, limitTracks, sessionId, limitPlaylists)
+          send_message('search', Search_args, :term => term, :limitArtists => limitArtists, :limitAlbums => limitAlbums, :limitTracks => limitTracks, :sessionId => sessionId, :limitPlaylists => limitPlaylists)
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByArtistId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Album}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByArtistIdWithPaging_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      INCLUDESINGLES = 4
-      ORDER = 5
-      SESSIONID = 6
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        INCLUDESINGLES => {:type => ::Thrift::Types::BOOL, :name => 'includeSingles'},
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::AlbumOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @order.nil? || ::WiMP::AlbumOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def recv_search()
+          result = receive_message(Search_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'search failed: unknown result')
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByArtistIdWithPaging_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Album}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByCategoryId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      CATEGORYID = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      SESSIONID = 4
-
-      FIELDS = {
-        CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByCategoryId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Album}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByIds_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ALBUMIDS = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ALBUMIDS => {:type => ::Thrift::Types::LIST, :name => 'albumIds', :element => {:type => ::Thrift::Types::I32}},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAlbumsByIds_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Album}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAllUserPlaylists_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSIONID = 1
-
-      FIELDS = {
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetAllUserPlaylists_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Playlist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetArtistById_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetArtistById_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Artist}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetArtistMetaData_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetArtistMetaData_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::ArtistMetaData}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetBookletURL_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ALBUMID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetBookletURL_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRING, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetCategories_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      CATEGORYID = 1
-      SESSIONID = 2
-      STARTINDEX = 3
-      LIMIT = 4
-
-      FIELDS = {
-        CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetCategories_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Category}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetCategoryAndSubCategories_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      CATEGORYID = 1
-      DEPTH = 2
-      SESSIONID = 3
-
-      FIELDS = {
-        CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
-        DEPTH => {:type => ::Thrift::Types::I32, :name => 'depth'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetCategoryAndSubCategories_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::CategoryTree}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetCategoryById_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      CATEGORYID = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetCategoryById_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Category}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteAlbums_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ORDER = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def addAlbumToFavorites(albumId, sessionId)
+          send_addAlbumToFavorites(albumId, sessionId)
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteAlbums_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoriteAlbum}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteAlbumsByProfileId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PROFILEID = 1
-      PARAMPRIVACYLEVEL = 2
-      ORDER = 3
-      SESSIONID = 4
-
-      FIELDS = {
-        PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
-        PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::PrivacyLevel},
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @paramPrivacyLevel.nil? || ::WiMP::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+        def send_addAlbumToFavorites(albumId, sessionId)
+          send_message('addAlbumToFavorites', AddAlbumToFavorites_args, :albumId => albumId, :sessionId => sessionId)
         end
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def addArtistToFavorites(artistId, sessionId)
+          send_addArtistToFavorites(artistId, sessionId)
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteAlbumsByProfileId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoriteAlbum}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteArtists_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ORDER = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def send_addArtistToFavorites(artistId, sessionId)
+          send_message('addArtistToFavorites', AddArtistToFavorites_args, :artistId => artistId, :sessionId => sessionId)
         end
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteArtists_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoriteArtist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteArtistsByProfileId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PROFILEID = 1
-      PARAMPRIVACYLEVEL = 2
-      ORDER = 3
-      SESSIONID = 4
-
-      FIELDS = {
-        PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
-        PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::PrivacyLevel},
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @paramPrivacyLevel.nil? || ::WiMP::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+        def addFriend(userId, sessionId)
+          send_addFriend(userId, sessionId)
         end
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+
+        def send_addFriend(userId, sessionId)
+          send_message('addFriend', AddFriend_args, :userId => userId, :sessionId => sessionId)
         end
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteArtistsByProfileId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoriteArtist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoritePlaylists_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ORDER = 1
-      SESSIONID = 2
-
-      FIELDS = {
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def addPlaylistToFavorites(playlistUUID, sessionId)
+          send_addPlaylistToFavorites(playlistUUID, sessionId)
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoritePlaylists_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoritePlaylist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoritePlaylistsByProfileId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PROFILEID = 1
-      PARAMPRIVACYLEVEL = 2
-      ORDER = 3
-      SESSONID = 4
-
-      FIELDS = {
-        PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
-        PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::PrivacyLevel},
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @paramPrivacyLevel.nil? || ::WiMP::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+        def send_addPlaylistToFavorites(playlistUUID, sessionId)
+          send_message('addPlaylistToFavorites', AddPlaylistToFavorites_args, :playlistUUID => playlistUUID, :sessionId => sessionId)
         end
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def addTrackToFavorites(trackId, sessionId)
+          send_addTrackToFavorites(trackId, sessionId)
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoritePlaylistsByProfileId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoritePlaylist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteTracks_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ORDER = 1
-      SESSONID = 2
-
-      FIELDS = {
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+        def send_addTrackToFavorites(trackId, sessionId)
+          send_message('addTrackToFavorites', AddTrackToFavorites_args, :trackId => trackId, :sessionId => sessionId)
         end
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteTracks_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoriteTrack}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteTracksByProfileId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PROFILEID = 1
-      PARAMPRIVACYLEVEL = 2
-      ORDER = 3
-      SESSONID = 4
-
-      FIELDS = {
-        PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
-        PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::PrivacyLevel},
-        ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::FavoriteOrderBy},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @paramPrivacyLevel.nil? || ::WiMP::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+        def addTracksToUserPlaylist(playlistUUID, tracks, position, sessionId)
+          send_addTracksToUserPlaylist(playlistUUID, tracks, position, sessionId)
+          return recv_addTracksToUserPlaylist()
         end
-        unless @order.nil? || ::WiMP::FavoriteOrderBy::VALID_VALUES.include?(@order)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+
+        def send_addTracksToUserPlaylist(playlistUUID, tracks, position, sessionId)
+          send_message('addTracksToUserPlaylist', AddTracksToUserPlaylist_args, :playlistUUID => playlistUUID, :tracks => tracks, :position => position, :sessionId => sessionId)
         end
-      end
 
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFavoriteTracksByProfileId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::FavoriteTrack}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetWallPosts_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      PROFILEID = 1
-      STARTINDEX = 2
-      OFFSET = 3
-      SESSONID = 4
-
-      FIELDS = {
-        PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        OFFSET => {:type => ::Thrift::Types::I32, :name => 'offset'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetWallPosts_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::WallPost}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFriends_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSONID = 1
-
-      FIELDS = {
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetFriends_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Friend}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavAlbum_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSONID = 1
-
-      FIELDS = {
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavAlbum_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavArtist_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSONID = 1
-
-      FIELDS = {
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavArtist_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavPlaylist_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSONID = 1
-
-      FIELDS = {
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavPlaylist_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavTrack_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSONID = 1
-
-      FIELDS = {
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedFavTrack_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedPlaylist_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SESSONID = 1
-
-      FIELDS = {
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetLastUpdatedPlaylist_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetPlaylistsByCategoryId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      CATEGORYID = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      SESSONID = 4
-
-      FIELDS = {
-        CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetPlaylistsByCategoryId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Playlist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetProfileTrackPlayListsByArtistId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      SESSONID = 4
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetProfileTrackPlayListsByArtistId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Playlist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetProfileTrackPlayListsInclidingArtistId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      SESSONID = 4
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetProfileTrackPlayListsInclidingArtistId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Playlist}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTopTracksByArtistId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTID = 1
-      LIMIT = 2
-      ONLYASMAINARTIST = 3
-      SESSONID = 4
-
-      FIELDS = {
-        ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        ONLYASMAINARTIST => {:type => ::Thrift::Types::BOOL, :name => 'onlyAsMainArtist'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTopTracksByArtistId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Track}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTrackById_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      TRACKID = 1
-      SESSONID = 2
-
-      FIELDS = {
-        TRACKID => {:type => ::Thrift::Types::I32, :name => 'trackId'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTrackById_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Track}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTracksByAlbumId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ALBUMID = 1
-      SESSONID = 2
-
-      FIELDS = {
-        ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTracksByAlbumId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Track}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTracksByCategoryId_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      CATEGORYID = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      SESSONID = 4
-
-      FIELDS = {
-        CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetTracksByCategoryId_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Track}}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetUserPlaylistByUuid_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      UUID = 1
-      SESSONID = 2
-
-      FIELDS = {
-        UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetUserPlaylistByUuid_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
-
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Playlist}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-      end
-
-      ::Thrift::Struct.generate_accessors self
-    end
-
-    class GetUserPlaylistsByType_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      TYPE = 1
-      STARTINDEX = 2
-      LIMIT = 3
-      SESSONID = 4
-
-      FIELDS = {
-        TYPE => {:type => ::Thrift::Types::I32, :name => 'type', :enum_class => ::WiMP::PlaylistType},
-        STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
-
-      def struct_fields; FIELDS; end
-
-      def validate
-        unless @type.nil? || ::WiMP::PlaylistType::VALID_VALUES.include?(@type)
-          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field type!')
+        def recv_addTracksToUserPlaylist()
+          result = receive_message(AddTracksToUserPlaylist_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'addTracksToUserPlaylist failed: unknown result')
         end
+
+        def addUserPlaylist(title, sessionId)
+          send_addUserPlaylist(title, sessionId)
+          return recv_addUserPlaylist()
+        end
+
+        def send_addUserPlaylist(title, sessionId)
+          send_message('addUserPlaylist', AddUserPlaylist_args, :title => title, :sessionId => sessionId)
+        end
+
+        def recv_addUserPlaylist()
+          result = receive_message(AddUserPlaylist_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'addUserPlaylist failed: unknown result')
+        end
+
+        def getAlbumById(albumId, sessionId)
+          send_getAlbumById(albumId, sessionId)
+          return recv_getAlbumById()
+        end
+
+        def send_getAlbumById(albumId, sessionId)
+          send_message('getAlbumById', GetAlbumById_args, :albumId => albumId, :sessionId => sessionId)
+        end
+
+        def recv_getAlbumById()
+          result = receive_message(GetAlbumById_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumById failed: unknown result')
+        end
+
+        def getAlbumMetaData(albumId, sessionId)
+          send_getAlbumMetaData(albumId, sessionId)
+          return recv_getAlbumMetaData()
+        end
+
+        def send_getAlbumMetaData(albumId, sessionId)
+          send_message('getAlbumMetaData', GetAlbumMetaData_args, :albumId => albumId, :sessionId => sessionId)
+        end
+
+        def recv_getAlbumMetaData()
+          result = receive_message(GetAlbumMetaData_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumMetaData failed: unknown result')
+        end
+
+        def getAlbumsByArtistId(artistId, limit, order, sessionId, filter)
+          send_getAlbumsByArtistId(artistId, limit, order, sessionId, filter)
+          return recv_getAlbumsByArtistId()
+        end
+
+        def send_getAlbumsByArtistId(artistId, limit, order, sessionId, filter)
+          send_message('getAlbumsByArtistId', GetAlbumsByArtistId_args, :artistId => artistId, :limit => limit, :order => order, :sessionId => sessionId, :filter => filter)
+        end
+
+        def recv_getAlbumsByArtistId()
+          result = receive_message(GetAlbumsByArtistId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByArtistId failed: unknown result')
+        end
+
+        def getAlbumsByArtistIdWithPaging(artistId, startIndex, limit, includeSingles, order, sessionId)
+          send_getAlbumsByArtistIdWithPaging(artistId, startIndex, limit, includeSingles, order, sessionId)
+          return recv_getAlbumsByArtistIdWithPaging()
+        end
+
+        def send_getAlbumsByArtistIdWithPaging(artistId, startIndex, limit, includeSingles, order, sessionId)
+          send_message('getAlbumsByArtistIdWithPaging', GetAlbumsByArtistIdWithPaging_args, :artistId => artistId, :startIndex => startIndex, :limit => limit, :includeSingles => includeSingles, :order => order, :sessionId => sessionId)
+        end
+
+        def recv_getAlbumsByArtistIdWithPaging()
+          result = receive_message(GetAlbumsByArtistIdWithPaging_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByArtistIdWithPaging failed: unknown result')
+        end
+
+        def getAlbumsByCategoryId(categoryId, startIndex, limit, sessionId)
+          send_getAlbumsByCategoryId(categoryId, startIndex, limit, sessionId)
+          return recv_getAlbumsByCategoryId()
+        end
+
+        def send_getAlbumsByCategoryId(categoryId, startIndex, limit, sessionId)
+          send_message('getAlbumsByCategoryId', GetAlbumsByCategoryId_args, :categoryId => categoryId, :startIndex => startIndex, :limit => limit, :sessionId => sessionId)
+        end
+
+        def recv_getAlbumsByCategoryId()
+          result = receive_message(GetAlbumsByCategoryId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByCategoryId failed: unknown result')
+        end
+
+        def getAlbumsByIds(albumIds, sessionId)
+          send_getAlbumsByIds(albumIds, sessionId)
+          return recv_getAlbumsByIds()
+        end
+
+        def send_getAlbumsByIds(albumIds, sessionId)
+          send_message('getAlbumsByIds', GetAlbumsByIds_args, :albumIds => albumIds, :sessionId => sessionId)
+        end
+
+        def recv_getAlbumsByIds()
+          result = receive_message(GetAlbumsByIds_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAlbumsByIds failed: unknown result')
+        end
+
+        def getAllUserPlaylists(sessionId)
+          send_getAllUserPlaylists(sessionId)
+          return recv_getAllUserPlaylists()
+        end
+
+        def send_getAllUserPlaylists(sessionId)
+          send_message('getAllUserPlaylists', GetAllUserPlaylists_args, :sessionId => sessionId)
+        end
+
+        def recv_getAllUserPlaylists()
+          result = receive_message(GetAllUserPlaylists_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getAllUserPlaylists failed: unknown result')
+        end
+
+        def getArtistById(artistId, sessionId)
+          send_getArtistById(artistId, sessionId)
+          return recv_getArtistById()
+        end
+
+        def send_getArtistById(artistId, sessionId)
+          send_message('getArtistById', GetArtistById_args, :artistId => artistId, :sessionId => sessionId)
+        end
+
+        def recv_getArtistById()
+          result = receive_message(GetArtistById_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getArtistById failed: unknown result')
+        end
+
+        def getArtistMetaData(artistId, sessionId)
+          send_getArtistMetaData(artistId, sessionId)
+          return recv_getArtistMetaData()
+        end
+
+        def send_getArtistMetaData(artistId, sessionId)
+          send_message('getArtistMetaData', GetArtistMetaData_args, :artistId => artistId, :sessionId => sessionId)
+        end
+
+        def recv_getArtistMetaData()
+          result = receive_message(GetArtistMetaData_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getArtistMetaData failed: unknown result')
+        end
+
+        def getBookletURL(albumId, sessionId)
+          send_getBookletURL(albumId, sessionId)
+          return recv_getBookletURL()
+        end
+
+        def send_getBookletURL(albumId, sessionId)
+          send_message('getBookletURL', GetBookletURL_args, :albumId => albumId, :sessionId => sessionId)
+        end
+
+        def recv_getBookletURL()
+          result = receive_message(GetBookletURL_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getBookletURL failed: unknown result')
+        end
+
+        def getCategories(categoryId, sessionId, startIndex, limit)
+          send_getCategories(categoryId, sessionId, startIndex, limit)
+          return recv_getCategories()
+        end
+
+        def send_getCategories(categoryId, sessionId, startIndex, limit)
+          send_message('getCategories', GetCategories_args, :categoryId => categoryId, :sessionId => sessionId, :startIndex => startIndex, :limit => limit)
+        end
+
+        def recv_getCategories()
+          result = receive_message(GetCategories_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getCategories failed: unknown result')
+        end
+
+        def getCategoryAndSubCategories(categoryId, depth, sessionId)
+          send_getCategoryAndSubCategories(categoryId, depth, sessionId)
+          return recv_getCategoryAndSubCategories()
+        end
+
+        def send_getCategoryAndSubCategories(categoryId, depth, sessionId)
+          send_message('getCategoryAndSubCategories', GetCategoryAndSubCategories_args, :categoryId => categoryId, :depth => depth, :sessionId => sessionId)
+        end
+
+        def recv_getCategoryAndSubCategories()
+          result = receive_message(GetCategoryAndSubCategories_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getCategoryAndSubCategories failed: unknown result')
+        end
+
+        def getCategoryById(categoryId, sessionId)
+          send_getCategoryById(categoryId, sessionId)
+          return recv_getCategoryById()
+        end
+
+        def send_getCategoryById(categoryId, sessionId)
+          send_message('getCategoryById', GetCategoryById_args, :categoryId => categoryId, :sessionId => sessionId)
+        end
+
+        def recv_getCategoryById()
+          result = receive_message(GetCategoryById_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getCategoryById failed: unknown result')
+        end
+
+        def getFavoriteAlbums(order, sessionId)
+          send_getFavoriteAlbums(order, sessionId)
+          return recv_getFavoriteAlbums()
+        end
+
+        def send_getFavoriteAlbums(order, sessionId)
+          send_message('getFavoriteAlbums', GetFavoriteAlbums_args, :order => order, :sessionId => sessionId)
+        end
+
+        def recv_getFavoriteAlbums()
+          result = receive_message(GetFavoriteAlbums_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteAlbums failed: unknown result')
+        end
+
+        def getFavoriteAlbumsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
+          send_getFavoriteAlbumsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
+          return recv_getFavoriteAlbumsByProfileId()
+        end
+
+        def send_getFavoriteAlbumsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
+          send_message('getFavoriteAlbumsByProfileId', GetFavoriteAlbumsByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessionId => sessionId)
+        end
+
+        def recv_getFavoriteAlbumsByProfileId()
+          result = receive_message(GetFavoriteAlbumsByProfileId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteAlbumsByProfileId failed: unknown result')
+        end
+
+        def getFavoriteArtists(order, sessionId)
+          send_getFavoriteArtists(order, sessionId)
+          return recv_getFavoriteArtists()
+        end
+
+        def send_getFavoriteArtists(order, sessionId)
+          send_message('getFavoriteArtists', GetFavoriteArtists_args, :order => order, :sessionId => sessionId)
+        end
+
+        def recv_getFavoriteArtists()
+          result = receive_message(GetFavoriteArtists_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteArtists failed: unknown result')
+        end
+
+        def getFavoriteArtistsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
+          send_getFavoriteArtistsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
+          return recv_getFavoriteArtistsByProfileId()
+        end
+
+        def send_getFavoriteArtistsByProfileId(profileId, paramPrivacyLevel, order, sessionId)
+          send_message('getFavoriteArtistsByProfileId', GetFavoriteArtistsByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessionId => sessionId)
+        end
+
+        def recv_getFavoriteArtistsByProfileId()
+          result = receive_message(GetFavoriteArtistsByProfileId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteArtistsByProfileId failed: unknown result')
+        end
+
+        def getFavoritePlaylists(order, sessionId)
+          send_getFavoritePlaylists(order, sessionId)
+          return recv_getFavoritePlaylists()
+        end
+
+        def send_getFavoritePlaylists(order, sessionId)
+          send_message('getFavoritePlaylists', GetFavoritePlaylists_args, :order => order, :sessionId => sessionId)
+        end
+
+        def recv_getFavoritePlaylists()
+          result = receive_message(GetFavoritePlaylists_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoritePlaylists failed: unknown result')
+        end
+
+        def getFavoritePlaylistsByProfileId(profileId, paramPrivacyLevel, order, sessonId)
+          send_getFavoritePlaylistsByProfileId(profileId, paramPrivacyLevel, order, sessonId)
+          return recv_getFavoritePlaylistsByProfileId()
+        end
+
+        def send_getFavoritePlaylistsByProfileId(profileId, paramPrivacyLevel, order, sessonId)
+          send_message('getFavoritePlaylistsByProfileId', GetFavoritePlaylistsByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessonId => sessonId)
+        end
+
+        def recv_getFavoritePlaylistsByProfileId()
+          result = receive_message(GetFavoritePlaylistsByProfileId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoritePlaylistsByProfileId failed: unknown result')
+        end
+
+        def getFavoriteTracks(order, sessonId)
+          send_getFavoriteTracks(order, sessonId)
+          return recv_getFavoriteTracks()
+        end
+
+        def send_getFavoriteTracks(order, sessonId)
+          send_message('getFavoriteTracks', GetFavoriteTracks_args, :order => order, :sessonId => sessonId)
+        end
+
+        def recv_getFavoriteTracks()
+          result = receive_message(GetFavoriteTracks_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteTracks failed: unknown result')
+        end
+
+        def getFavoriteTracksByProfileId(profileId, paramPrivacyLevel, order, sessonId)
+          send_getFavoriteTracksByProfileId(profileId, paramPrivacyLevel, order, sessonId)
+          return recv_getFavoriteTracksByProfileId()
+        end
+
+        def send_getFavoriteTracksByProfileId(profileId, paramPrivacyLevel, order, sessonId)
+          send_message('getFavoriteTracksByProfileId', GetFavoriteTracksByProfileId_args, :profileId => profileId, :paramPrivacyLevel => paramPrivacyLevel, :order => order, :sessonId => sessonId)
+        end
+
+        def recv_getFavoriteTracksByProfileId()
+          result = receive_message(GetFavoriteTracksByProfileId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFavoriteTracksByProfileId failed: unknown result')
+        end
+
+        def getWallPosts(profileId, startIndex, offset, sessonId)
+          send_getWallPosts(profileId, startIndex, offset, sessonId)
+          return recv_getWallPosts()
+        end
+
+        def send_getWallPosts(profileId, startIndex, offset, sessonId)
+          send_message('getWallPosts', GetWallPosts_args, :profileId => profileId, :startIndex => startIndex, :offset => offset, :sessonId => sessonId)
+        end
+
+        def recv_getWallPosts()
+          result = receive_message(GetWallPosts_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getWallPosts failed: unknown result')
+        end
+
+        def getFriends(sessonId)
+          send_getFriends(sessonId)
+          return recv_getFriends()
+        end
+
+        def send_getFriends(sessonId)
+          send_message('getFriends', GetFriends_args, :sessonId => sessonId)
+        end
+
+        def recv_getFriends()
+          result = receive_message(GetFriends_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getFriends failed: unknown result')
+        end
+
+        def getLastUpdatedFavAlbum(sessonId)
+          send_getLastUpdatedFavAlbum(sessonId)
+          return recv_getLastUpdatedFavAlbum()
+        end
+
+        def send_getLastUpdatedFavAlbum(sessonId)
+          send_message('getLastUpdatedFavAlbum', GetLastUpdatedFavAlbum_args, :sessonId => sessonId)
+        end
+
+        def recv_getLastUpdatedFavAlbum()
+          result = receive_message(GetLastUpdatedFavAlbum_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavAlbum failed: unknown result')
+        end
+
+        def getLastUpdatedFavArtist(sessonId)
+          send_getLastUpdatedFavArtist(sessonId)
+          return recv_getLastUpdatedFavArtist()
+        end
+
+        def send_getLastUpdatedFavArtist(sessonId)
+          send_message('getLastUpdatedFavArtist', GetLastUpdatedFavArtist_args, :sessonId => sessonId)
+        end
+
+        def recv_getLastUpdatedFavArtist()
+          result = receive_message(GetLastUpdatedFavArtist_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavArtist failed: unknown result')
+        end
+
+        def getLastUpdatedFavPlaylist(sessonId)
+          send_getLastUpdatedFavPlaylist(sessonId)
+          return recv_getLastUpdatedFavPlaylist()
+        end
+
+        def send_getLastUpdatedFavPlaylist(sessonId)
+          send_message('getLastUpdatedFavPlaylist', GetLastUpdatedFavPlaylist_args, :sessonId => sessonId)
+        end
+
+        def recv_getLastUpdatedFavPlaylist()
+          result = receive_message(GetLastUpdatedFavPlaylist_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavPlaylist failed: unknown result')
+        end
+
+        def getLastUpdatedFavTrack(sessonId)
+          send_getLastUpdatedFavTrack(sessonId)
+          return recv_getLastUpdatedFavTrack()
+        end
+
+        def send_getLastUpdatedFavTrack(sessonId)
+          send_message('getLastUpdatedFavTrack', GetLastUpdatedFavTrack_args, :sessonId => sessonId)
+        end
+
+        def recv_getLastUpdatedFavTrack()
+          result = receive_message(GetLastUpdatedFavTrack_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedFavTrack failed: unknown result')
+        end
+
+        def getLastUpdatedPlaylist(sessonId)
+          send_getLastUpdatedPlaylist(sessonId)
+          return recv_getLastUpdatedPlaylist()
+        end
+
+        def send_getLastUpdatedPlaylist(sessonId)
+          send_message('getLastUpdatedPlaylist', GetLastUpdatedPlaylist_args, :sessonId => sessonId)
+        end
+
+        def recv_getLastUpdatedPlaylist()
+          result = receive_message(GetLastUpdatedPlaylist_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getLastUpdatedPlaylist failed: unknown result')
+        end
+
+        def getPlaylistsByCategoryId(categoryId, startIndex, limit, sessonId)
+          send_getPlaylistsByCategoryId(categoryId, startIndex, limit, sessonId)
+          return recv_getPlaylistsByCategoryId()
+        end
+
+        def send_getPlaylistsByCategoryId(categoryId, startIndex, limit, sessonId)
+          send_message('getPlaylistsByCategoryId', GetPlaylistsByCategoryId_args, :categoryId => categoryId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_getPlaylistsByCategoryId()
+          result = receive_message(GetPlaylistsByCategoryId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getPlaylistsByCategoryId failed: unknown result')
+        end
+
+        def getProfileTrackPlayListsByArtistId(artistId, startIndex, limit, sessonId)
+          send_getProfileTrackPlayListsByArtistId(artistId, startIndex, limit, sessonId)
+          return recv_getProfileTrackPlayListsByArtistId()
+        end
+
+        def send_getProfileTrackPlayListsByArtistId(artistId, startIndex, limit, sessonId)
+          send_message('getProfileTrackPlayListsByArtistId', GetProfileTrackPlayListsByArtistId_args, :artistId => artistId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_getProfileTrackPlayListsByArtistId()
+          result = receive_message(GetProfileTrackPlayListsByArtistId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getProfileTrackPlayListsByArtistId failed: unknown result')
+        end
+
+        def getProfileTrackPlayListsInclidingArtistId(artistId, startIndex, limit, sessonId)
+          send_getProfileTrackPlayListsInclidingArtistId(artistId, startIndex, limit, sessonId)
+          return recv_getProfileTrackPlayListsInclidingArtistId()
+        end
+
+        def send_getProfileTrackPlayListsInclidingArtistId(artistId, startIndex, limit, sessonId)
+          send_message('getProfileTrackPlayListsInclidingArtistId', GetProfileTrackPlayListsInclidingArtistId_args, :artistId => artistId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_getProfileTrackPlayListsInclidingArtistId()
+          result = receive_message(GetProfileTrackPlayListsInclidingArtistId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getProfileTrackPlayListsInclidingArtistId failed: unknown result')
+        end
+
+        def getTopTracksByArtistId(artistId, limit, onlyAsMainArtist, sessonId)
+          send_getTopTracksByArtistId(artistId, limit, onlyAsMainArtist, sessonId)
+          return recv_getTopTracksByArtistId()
+        end
+
+        def send_getTopTracksByArtistId(artistId, limit, onlyAsMainArtist, sessonId)
+          send_message('getTopTracksByArtistId', GetTopTracksByArtistId_args, :artistId => artistId, :limit => limit, :onlyAsMainArtist => onlyAsMainArtist, :sessonId => sessonId)
+        end
+
+        def recv_getTopTracksByArtistId()
+          result = receive_message(GetTopTracksByArtistId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTopTracksByArtistId failed: unknown result')
+        end
+
+        def getTrackById(trackId, sessonId)
+          send_getTrackById(trackId, sessonId)
+          return recv_getTrackById()
+        end
+
+        def send_getTrackById(trackId, sessonId)
+          send_message('getTrackById', GetTrackById_args, :trackId => trackId, :sessonId => sessonId)
+        end
+
+        def recv_getTrackById()
+          result = receive_message(GetTrackById_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTrackById failed: unknown result')
+        end
+
+        def getTracksByAlbumId(albumId, sessonId)
+          send_getTracksByAlbumId(albumId, sessonId)
+          return recv_getTracksByAlbumId()
+        end
+
+        def send_getTracksByAlbumId(albumId, sessonId)
+          send_message('getTracksByAlbumId', GetTracksByAlbumId_args, :albumId => albumId, :sessonId => sessonId)
+        end
+
+        def recv_getTracksByAlbumId()
+          result = receive_message(GetTracksByAlbumId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTracksByAlbumId failed: unknown result')
+        end
+
+        def getTracksByCategoryId(categoryId, startIndex, limit, sessonId)
+          send_getTracksByCategoryId(categoryId, startIndex, limit, sessonId)
+          return recv_getTracksByCategoryId()
+        end
+
+        def send_getTracksByCategoryId(categoryId, startIndex, limit, sessonId)
+          send_message('getTracksByCategoryId', GetTracksByCategoryId_args, :categoryId => categoryId, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_getTracksByCategoryId()
+          result = receive_message(GetTracksByCategoryId_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getTracksByCategoryId failed: unknown result')
+        end
+
+        def getUserPlaylistByUuid(uuid, sessonId)
+          send_getUserPlaylistByUuid(uuid, sessonId)
+          return recv_getUserPlaylistByUuid()
+        end
+
+        def send_getUserPlaylistByUuid(uuid, sessonId)
+          send_message('getUserPlaylistByUuid', GetUserPlaylistByUuid_args, :uuid => uuid, :sessonId => sessonId)
+        end
+
+        def recv_getUserPlaylistByUuid()
+          result = receive_message(GetUserPlaylistByUuid_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getUserPlaylistByUuid failed: unknown result')
+        end
+
+        def getUserPlaylistsByType(type, startIndex, limit, sessonId)
+          send_getUserPlaylistsByType(type, startIndex, limit, sessonId)
+          return recv_getUserPlaylistsByType()
+        end
+
+        def send_getUserPlaylistsByType(type, startIndex, limit, sessonId)
+          send_message('getUserPlaylistsByType', GetUserPlaylistsByType_args, :type => type, :startIndex => startIndex, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_getUserPlaylistsByType()
+          result = receive_message(GetUserPlaylistsByType_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getUserPlaylistsByType failed: unknown result')
+        end
+
+        def getUserPlaylistsByUuids(uuids, sessonId)
+          send_getUserPlaylistsByUuids(uuids, sessonId)
+          return recv_getUserPlaylistsByUuids()
+        end
+
+        def send_getUserPlaylistsByUuids(uuids, sessonId)
+          send_message('getUserPlaylistsByUuids', GetUserPlaylistsByUuids_args, :uuids => uuids, :sessonId => sessonId)
+        end
+
+        def recv_getUserPlaylistsByUuids()
+          result = receive_message(GetUserPlaylistsByUuids_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'getUserPlaylistsByUuids failed: unknown result')
+        end
+
+        def moveUserPlaylistTracks(uuid, fromIndex, toIndex, sessonId)
+          send_moveUserPlaylistTracks(uuid, fromIndex, toIndex, sessonId)
+          return recv_moveUserPlaylistTracks()
+        end
+
+        def send_moveUserPlaylistTracks(uuid, fromIndex, toIndex, sessonId)
+          send_message('moveUserPlaylistTracks', MoveUserPlaylistTracks_args, :uuid => uuid, :fromIndex => fromIndex, :toIndex => toIndex, :sessonId => sessonId)
+        end
+
+        def recv_moveUserPlaylistTracks()
+          result = receive_message(MoveUserPlaylistTracks_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'moveUserPlaylistTracks failed: unknown result')
+        end
+
+        def removeUserPlaylistByUuid(uuid, sessonId)
+          send_removeUserPlaylistByUuid(uuid, sessonId)
+          return recv_removeUserPlaylistByUuid()
+        end
+
+        def send_removeUserPlaylistByUuid(uuid, sessonId)
+          send_message('removeUserPlaylistByUuid', RemoveUserPlaylistByUuid_args, :uuid => uuid, :sessonId => sessonId)
+        end
+
+        def recv_removeUserPlaylistByUuid()
+          result = receive_message(RemoveUserPlaylistByUuid_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'removeUserPlaylistByUuid failed: unknown result')
+        end
+
+        def removeUserPlaylistTracks(uuid, indices, sessonId)
+          send_removeUserPlaylistTracks(uuid, indices, sessonId)
+          return recv_removeUserPlaylistTracks()
+        end
+
+        def send_removeUserPlaylistTracks(uuid, indices, sessonId)
+          send_message('removeUserPlaylistTracks', RemoveUserPlaylistTracks_args, :uuid => uuid, :indices => indices, :sessonId => sessonId)
+        end
+
+        def recv_removeUserPlaylistTracks()
+          result = receive_message(RemoveUserPlaylistTracks_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'removeUserPlaylistTracks failed: unknown result')
+        end
+
+        def renameUserPlaylistByUuid(uuid, title, sessonId)
+          send_renameUserPlaylistByUuid(uuid, title, sessonId)
+          return recv_renameUserPlaylistByUuid()
+        end
+
+        def send_renameUserPlaylistByUuid(uuid, title, sessonId)
+          send_message('renameUserPlaylistByUuid', RenameUserPlaylistByUuid_args, :uuid => uuid, :title => title, :sessonId => sessonId)
+        end
+
+        def recv_renameUserPlaylistByUuid()
+          result = receive_message(RenameUserPlaylistByUuid_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'renameUserPlaylistByUuid failed: unknown result')
+        end
+
+        def suggestTracksByArtistIds(artistIds, limit, sessonId)
+          send_suggestTracksByArtistIds(artistIds, limit, sessonId)
+          return recv_suggestTracksByArtistIds()
+        end
+
+        def send_suggestTracksByArtistIds(artistIds, limit, sessonId)
+          send_message('suggestTracksByArtistIds', SuggestTracksByArtistIds_args, :artistIds => artistIds, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_suggestTracksByArtistIds()
+          result = receive_message(SuggestTracksByArtistIds_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'suggestTracksByArtistIds failed: unknown result')
+        end
+
+        def suggestTracksByTrackIds(trackIds, limit, sessonId)
+          send_suggestTracksByTrackIds(trackIds, limit, sessonId)
+          return recv_suggestTracksByTrackIds()
+        end
+
+        def send_suggestTracksByTrackIds(trackIds, limit, sessonId)
+          send_message('suggestTracksByTrackIds', SuggestTracksByTrackIds_args, :trackIds => trackIds, :limit => limit, :sessonId => sessonId)
+        end
+
+        def recv_suggestTracksByTrackIds()
+          result = receive_message(SuggestTracksByTrackIds_result)
+          return result.success unless result.success.nil?
+          raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'suggestTracksByTrackIds failed: unknown result')
+        end
+
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class Processor
+        include ::Thrift::Processor
 
-    class GetUserPlaylistsByType_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        def process_search(seqid, iprot, oprot)
+          args = read_args(iprot, Search_args)
+          result = Search_result.new()
+          result.success = @handler.search(args.term, args.limitArtists, args.limitAlbums, args.limitTracks, args.sessionId, args.limitPlaylists)
+          write_result(result, oprot, 'search', seqid)
+        end
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Playlist}}
-      }
+        def process_addAlbumToFavorites(seqid, iprot, oprot)
+          args = read_args(iprot, AddAlbumToFavorites_args)
+          @handler.addAlbumToFavorites(args.albumId, args.sessionId)
+          return
+        end
 
-      def struct_fields; FIELDS; end
+        def process_addArtistToFavorites(seqid, iprot, oprot)
+          args = read_args(iprot, AddArtistToFavorites_args)
+          @handler.addArtistToFavorites(args.artistId, args.sessionId)
+          return
+        end
 
-      def validate
+        def process_addFriend(seqid, iprot, oprot)
+          args = read_args(iprot, AddFriend_args)
+          @handler.addFriend(args.userId, args.sessionId)
+          return
+        end
+
+        def process_addPlaylistToFavorites(seqid, iprot, oprot)
+          args = read_args(iprot, AddPlaylistToFavorites_args)
+          @handler.addPlaylistToFavorites(args.playlistUUID, args.sessionId)
+          return
+        end
+
+        def process_addTrackToFavorites(seqid, iprot, oprot)
+          args = read_args(iprot, AddTrackToFavorites_args)
+          @handler.addTrackToFavorites(args.trackId, args.sessionId)
+          return
+        end
+
+        def process_addTracksToUserPlaylist(seqid, iprot, oprot)
+          args = read_args(iprot, AddTracksToUserPlaylist_args)
+          result = AddTracksToUserPlaylist_result.new()
+          result.success = @handler.addTracksToUserPlaylist(args.playlistUUID, args.tracks, args.position, args.sessionId)
+          write_result(result, oprot, 'addTracksToUserPlaylist', seqid)
+        end
+
+        def process_addUserPlaylist(seqid, iprot, oprot)
+          args = read_args(iprot, AddUserPlaylist_args)
+          result = AddUserPlaylist_result.new()
+          result.success = @handler.addUserPlaylist(args.title, args.sessionId)
+          write_result(result, oprot, 'addUserPlaylist', seqid)
+        end
+
+        def process_getAlbumById(seqid, iprot, oprot)
+          args = read_args(iprot, GetAlbumById_args)
+          result = GetAlbumById_result.new()
+          result.success = @handler.getAlbumById(args.albumId, args.sessionId)
+          write_result(result, oprot, 'getAlbumById', seqid)
+        end
+
+        def process_getAlbumMetaData(seqid, iprot, oprot)
+          args = read_args(iprot, GetAlbumMetaData_args)
+          result = GetAlbumMetaData_result.new()
+          result.success = @handler.getAlbumMetaData(args.albumId, args.sessionId)
+          write_result(result, oprot, 'getAlbumMetaData', seqid)
+        end
+
+        def process_getAlbumsByArtistId(seqid, iprot, oprot)
+          args = read_args(iprot, GetAlbumsByArtistId_args)
+          result = GetAlbumsByArtistId_result.new()
+          result.success = @handler.getAlbumsByArtistId(args.artistId, args.limit, args.order, args.sessionId, args.filter)
+          write_result(result, oprot, 'getAlbumsByArtistId', seqid)
+        end
+
+        def process_getAlbumsByArtistIdWithPaging(seqid, iprot, oprot)
+          args = read_args(iprot, GetAlbumsByArtistIdWithPaging_args)
+          result = GetAlbumsByArtistIdWithPaging_result.new()
+          result.success = @handler.getAlbumsByArtistIdWithPaging(args.artistId, args.startIndex, args.limit, args.includeSingles, args.order, args.sessionId)
+          write_result(result, oprot, 'getAlbumsByArtistIdWithPaging', seqid)
+        end
+
+        def process_getAlbumsByCategoryId(seqid, iprot, oprot)
+          args = read_args(iprot, GetAlbumsByCategoryId_args)
+          result = GetAlbumsByCategoryId_result.new()
+          result.success = @handler.getAlbumsByCategoryId(args.categoryId, args.startIndex, args.limit, args.sessionId)
+          write_result(result, oprot, 'getAlbumsByCategoryId', seqid)
+        end
+
+        def process_getAlbumsByIds(seqid, iprot, oprot)
+          args = read_args(iprot, GetAlbumsByIds_args)
+          result = GetAlbumsByIds_result.new()
+          result.success = @handler.getAlbumsByIds(args.albumIds, args.sessionId)
+          write_result(result, oprot, 'getAlbumsByIds', seqid)
+        end
+
+        def process_getAllUserPlaylists(seqid, iprot, oprot)
+          args = read_args(iprot, GetAllUserPlaylists_args)
+          result = GetAllUserPlaylists_result.new()
+          result.success = @handler.getAllUserPlaylists(args.sessionId)
+          write_result(result, oprot, 'getAllUserPlaylists', seqid)
+        end
+
+        def process_getArtistById(seqid, iprot, oprot)
+          args = read_args(iprot, GetArtistById_args)
+          result = GetArtistById_result.new()
+          result.success = @handler.getArtistById(args.artistId, args.sessionId)
+          write_result(result, oprot, 'getArtistById', seqid)
+        end
+
+        def process_getArtistMetaData(seqid, iprot, oprot)
+          args = read_args(iprot, GetArtistMetaData_args)
+          result = GetArtistMetaData_result.new()
+          result.success = @handler.getArtistMetaData(args.artistId, args.sessionId)
+          write_result(result, oprot, 'getArtistMetaData', seqid)
+        end
+
+        def process_getBookletURL(seqid, iprot, oprot)
+          args = read_args(iprot, GetBookletURL_args)
+          result = GetBookletURL_result.new()
+          result.success = @handler.getBookletURL(args.albumId, args.sessionId)
+          write_result(result, oprot, 'getBookletURL', seqid)
+        end
+
+        def process_getCategories(seqid, iprot, oprot)
+          args = read_args(iprot, GetCategories_args)
+          result = GetCategories_result.new()
+          result.success = @handler.getCategories(args.categoryId, args.sessionId, args.startIndex, args.limit)
+          write_result(result, oprot, 'getCategories', seqid)
+        end
+
+        def process_getCategoryAndSubCategories(seqid, iprot, oprot)
+          args = read_args(iprot, GetCategoryAndSubCategories_args)
+          result = GetCategoryAndSubCategories_result.new()
+          result.success = @handler.getCategoryAndSubCategories(args.categoryId, args.depth, args.sessionId)
+          write_result(result, oprot, 'getCategoryAndSubCategories', seqid)
+        end
+
+        def process_getCategoryById(seqid, iprot, oprot)
+          args = read_args(iprot, GetCategoryById_args)
+          result = GetCategoryById_result.new()
+          result.success = @handler.getCategoryById(args.categoryId, args.sessionId)
+          write_result(result, oprot, 'getCategoryById', seqid)
+        end
+
+        def process_getFavoriteAlbums(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoriteAlbums_args)
+          result = GetFavoriteAlbums_result.new()
+          result.success = @handler.getFavoriteAlbums(args.order, args.sessionId)
+          write_result(result, oprot, 'getFavoriteAlbums', seqid)
+        end
+
+        def process_getFavoriteAlbumsByProfileId(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoriteAlbumsByProfileId_args)
+          result = GetFavoriteAlbumsByProfileId_result.new()
+          result.success = @handler.getFavoriteAlbumsByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessionId)
+          write_result(result, oprot, 'getFavoriteAlbumsByProfileId', seqid)
+        end
+
+        def process_getFavoriteArtists(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoriteArtists_args)
+          result = GetFavoriteArtists_result.new()
+          result.success = @handler.getFavoriteArtists(args.order, args.sessionId)
+          write_result(result, oprot, 'getFavoriteArtists', seqid)
+        end
+
+        def process_getFavoriteArtistsByProfileId(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoriteArtistsByProfileId_args)
+          result = GetFavoriteArtistsByProfileId_result.new()
+          result.success = @handler.getFavoriteArtistsByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessionId)
+          write_result(result, oprot, 'getFavoriteArtistsByProfileId', seqid)
+        end
+
+        def process_getFavoritePlaylists(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoritePlaylists_args)
+          result = GetFavoritePlaylists_result.new()
+          result.success = @handler.getFavoritePlaylists(args.order, args.sessionId)
+          write_result(result, oprot, 'getFavoritePlaylists', seqid)
+        end
+
+        def process_getFavoritePlaylistsByProfileId(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoritePlaylistsByProfileId_args)
+          result = GetFavoritePlaylistsByProfileId_result.new()
+          result.success = @handler.getFavoritePlaylistsByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessonId)
+          write_result(result, oprot, 'getFavoritePlaylistsByProfileId', seqid)
+        end
+
+        def process_getFavoriteTracks(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoriteTracks_args)
+          result = GetFavoriteTracks_result.new()
+          result.success = @handler.getFavoriteTracks(args.order, args.sessonId)
+          write_result(result, oprot, 'getFavoriteTracks', seqid)
+        end
+
+        def process_getFavoriteTracksByProfileId(seqid, iprot, oprot)
+          args = read_args(iprot, GetFavoriteTracksByProfileId_args)
+          result = GetFavoriteTracksByProfileId_result.new()
+          result.success = @handler.getFavoriteTracksByProfileId(args.profileId, args.paramPrivacyLevel, args.order, args.sessonId)
+          write_result(result, oprot, 'getFavoriteTracksByProfileId', seqid)
+        end
+
+        def process_getWallPosts(seqid, iprot, oprot)
+          args = read_args(iprot, GetWallPosts_args)
+          result = GetWallPosts_result.new()
+          result.success = @handler.getWallPosts(args.profileId, args.startIndex, args.offset, args.sessonId)
+          write_result(result, oprot, 'getWallPosts', seqid)
+        end
+
+        def process_getFriends(seqid, iprot, oprot)
+          args = read_args(iprot, GetFriends_args)
+          result = GetFriends_result.new()
+          result.success = @handler.getFriends(args.sessonId)
+          write_result(result, oprot, 'getFriends', seqid)
+        end
+
+        def process_getLastUpdatedFavAlbum(seqid, iprot, oprot)
+          args = read_args(iprot, GetLastUpdatedFavAlbum_args)
+          result = GetLastUpdatedFavAlbum_result.new()
+          result.success = @handler.getLastUpdatedFavAlbum(args.sessonId)
+          write_result(result, oprot, 'getLastUpdatedFavAlbum', seqid)
+        end
+
+        def process_getLastUpdatedFavArtist(seqid, iprot, oprot)
+          args = read_args(iprot, GetLastUpdatedFavArtist_args)
+          result = GetLastUpdatedFavArtist_result.new()
+          result.success = @handler.getLastUpdatedFavArtist(args.sessonId)
+          write_result(result, oprot, 'getLastUpdatedFavArtist', seqid)
+        end
+
+        def process_getLastUpdatedFavPlaylist(seqid, iprot, oprot)
+          args = read_args(iprot, GetLastUpdatedFavPlaylist_args)
+          result = GetLastUpdatedFavPlaylist_result.new()
+          result.success = @handler.getLastUpdatedFavPlaylist(args.sessonId)
+          write_result(result, oprot, 'getLastUpdatedFavPlaylist', seqid)
+        end
+
+        def process_getLastUpdatedFavTrack(seqid, iprot, oprot)
+          args = read_args(iprot, GetLastUpdatedFavTrack_args)
+          result = GetLastUpdatedFavTrack_result.new()
+          result.success = @handler.getLastUpdatedFavTrack(args.sessonId)
+          write_result(result, oprot, 'getLastUpdatedFavTrack', seqid)
+        end
+
+        def process_getLastUpdatedPlaylist(seqid, iprot, oprot)
+          args = read_args(iprot, GetLastUpdatedPlaylist_args)
+          result = GetLastUpdatedPlaylist_result.new()
+          result.success = @handler.getLastUpdatedPlaylist(args.sessonId)
+          write_result(result, oprot, 'getLastUpdatedPlaylist', seqid)
+        end
+
+        def process_getPlaylistsByCategoryId(seqid, iprot, oprot)
+          args = read_args(iprot, GetPlaylistsByCategoryId_args)
+          result = GetPlaylistsByCategoryId_result.new()
+          result.success = @handler.getPlaylistsByCategoryId(args.categoryId, args.startIndex, args.limit, args.sessonId)
+          write_result(result, oprot, 'getPlaylistsByCategoryId', seqid)
+        end
+
+        def process_getProfileTrackPlayListsByArtistId(seqid, iprot, oprot)
+          args = read_args(iprot, GetProfileTrackPlayListsByArtistId_args)
+          result = GetProfileTrackPlayListsByArtistId_result.new()
+          result.success = @handler.getProfileTrackPlayListsByArtistId(args.artistId, args.startIndex, args.limit, args.sessonId)
+          write_result(result, oprot, 'getProfileTrackPlayListsByArtistId', seqid)
+        end
+
+        def process_getProfileTrackPlayListsInclidingArtistId(seqid, iprot, oprot)
+          args = read_args(iprot, GetProfileTrackPlayListsInclidingArtistId_args)
+          result = GetProfileTrackPlayListsInclidingArtistId_result.new()
+          result.success = @handler.getProfileTrackPlayListsInclidingArtistId(args.artistId, args.startIndex, args.limit, args.sessonId)
+          write_result(result, oprot, 'getProfileTrackPlayListsInclidingArtistId', seqid)
+        end
+
+        def process_getTopTracksByArtistId(seqid, iprot, oprot)
+          args = read_args(iprot, GetTopTracksByArtistId_args)
+          result = GetTopTracksByArtistId_result.new()
+          result.success = @handler.getTopTracksByArtistId(args.artistId, args.limit, args.onlyAsMainArtist, args.sessonId)
+          write_result(result, oprot, 'getTopTracksByArtistId', seqid)
+        end
+
+        def process_getTrackById(seqid, iprot, oprot)
+          args = read_args(iprot, GetTrackById_args)
+          result = GetTrackById_result.new()
+          result.success = @handler.getTrackById(args.trackId, args.sessonId)
+          write_result(result, oprot, 'getTrackById', seqid)
+        end
+
+        def process_getTracksByAlbumId(seqid, iprot, oprot)
+          args = read_args(iprot, GetTracksByAlbumId_args)
+          result = GetTracksByAlbumId_result.new()
+          result.success = @handler.getTracksByAlbumId(args.albumId, args.sessonId)
+          write_result(result, oprot, 'getTracksByAlbumId', seqid)
+        end
+
+        def process_getTracksByCategoryId(seqid, iprot, oprot)
+          args = read_args(iprot, GetTracksByCategoryId_args)
+          result = GetTracksByCategoryId_result.new()
+          result.success = @handler.getTracksByCategoryId(args.categoryId, args.startIndex, args.limit, args.sessonId)
+          write_result(result, oprot, 'getTracksByCategoryId', seqid)
+        end
+
+        def process_getUserPlaylistByUuid(seqid, iprot, oprot)
+          args = read_args(iprot, GetUserPlaylistByUuid_args)
+          result = GetUserPlaylistByUuid_result.new()
+          result.success = @handler.getUserPlaylistByUuid(args.uuid, args.sessonId)
+          write_result(result, oprot, 'getUserPlaylistByUuid', seqid)
+        end
+
+        def process_getUserPlaylistsByType(seqid, iprot, oprot)
+          args = read_args(iprot, GetUserPlaylistsByType_args)
+          result = GetUserPlaylistsByType_result.new()
+          result.success = @handler.getUserPlaylistsByType(args.type, args.startIndex, args.limit, args.sessonId)
+          write_result(result, oprot, 'getUserPlaylistsByType', seqid)
+        end
+
+        def process_getUserPlaylistsByUuids(seqid, iprot, oprot)
+          args = read_args(iprot, GetUserPlaylistsByUuids_args)
+          result = GetUserPlaylistsByUuids_result.new()
+          result.success = @handler.getUserPlaylistsByUuids(args.uuids, args.sessonId)
+          write_result(result, oprot, 'getUserPlaylistsByUuids', seqid)
+        end
+
+        def process_moveUserPlaylistTracks(seqid, iprot, oprot)
+          args = read_args(iprot, MoveUserPlaylistTracks_args)
+          result = MoveUserPlaylistTracks_result.new()
+          result.success = @handler.moveUserPlaylistTracks(args.uuid, args.fromIndex, args.toIndex, args.sessonId)
+          write_result(result, oprot, 'moveUserPlaylistTracks', seqid)
+        end
+
+        def process_removeUserPlaylistByUuid(seqid, iprot, oprot)
+          args = read_args(iprot, RemoveUserPlaylistByUuid_args)
+          result = RemoveUserPlaylistByUuid_result.new()
+          result.success = @handler.removeUserPlaylistByUuid(args.uuid, args.sessonId)
+          write_result(result, oprot, 'removeUserPlaylistByUuid', seqid)
+        end
+
+        def process_removeUserPlaylistTracks(seqid, iprot, oprot)
+          args = read_args(iprot, RemoveUserPlaylistTracks_args)
+          result = RemoveUserPlaylistTracks_result.new()
+          result.success = @handler.removeUserPlaylistTracks(args.uuid, args.indices, args.sessonId)
+          write_result(result, oprot, 'removeUserPlaylistTracks', seqid)
+        end
+
+        def process_renameUserPlaylistByUuid(seqid, iprot, oprot)
+          args = read_args(iprot, RenameUserPlaylistByUuid_args)
+          result = RenameUserPlaylistByUuid_result.new()
+          result.success = @handler.renameUserPlaylistByUuid(args.uuid, args.title, args.sessonId)
+          write_result(result, oprot, 'renameUserPlaylistByUuid', seqid)
+        end
+
+        def process_suggestTracksByArtistIds(seqid, iprot, oprot)
+          args = read_args(iprot, SuggestTracksByArtistIds_args)
+          result = SuggestTracksByArtistIds_result.new()
+          result.success = @handler.suggestTracksByArtistIds(args.artistIds, args.limit, args.sessonId)
+          write_result(result, oprot, 'suggestTracksByArtistIds', seqid)
+        end
+
+        def process_suggestTracksByTrackIds(seqid, iprot, oprot)
+          args = read_args(iprot, SuggestTracksByTrackIds_args)
+          result = SuggestTracksByTrackIds_result.new()
+          result.success = @handler.suggestTracksByTrackIds(args.trackIds, args.limit, args.sessonId)
+          write_result(result, oprot, 'suggestTracksByTrackIds', seqid)
+        end
+
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      # HELPER FUNCTIONS AND STRUCTURES
 
-    class GetUserPlaylistsByUuids_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      UUIDS = 1
-      SESSONID = 2
+      class Search_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        TERM = 1
+        LIMITARTISTS = 2
+        LIMITALBUMS = 3
+        LIMITTRACKS = 4
+        SESSIONID = 5
+        LIMITPLAYLISTS = 6
 
-      FIELDS = {
-        UUIDS => {:type => ::Thrift::Types::LIST, :name => 'uuids', :element => {:type => ::Thrift::Types::STRING}},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        FIELDS = {
+          TERM => {:type => ::Thrift::Types::STRING, :name => 'term'},
+          LIMITARTISTS => {:type => ::Thrift::Types::I32, :name => 'limitArtists'},
+          LIMITALBUMS => {:type => ::Thrift::Types::I32, :name => 'limitAlbums'},
+          LIMITTRACKS => {:type => ::Thrift::Types::I32, :name => 'limitTracks'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'},
+          LIMITPLAYLISTS => {:type => ::Thrift::Types::I32, :name => 'limitPlaylists'}
+        }
 
-      def struct_fields; FIELDS; end
+        def struct_fields; FIELDS; end
 
-      def validate
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class Search_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
 
-    class GetUserPlaylistsByUuids_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::SearchResult}
+        }
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Playlist}}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddAlbumToFavorites_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ALBUMID = 1
+        SESSIONID = 2
 
-    class MoveUserPlaylistTracks_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      UUID = 1
-      FROMINDEX = 2
-      TOINDEX = 3
-      SESSONID = 4
+        FIELDS = {
+          ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
 
-      FIELDS = {
-        UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
-        FROMINDEX => {:type => ::Thrift::Types::LIST, :name => 'fromIndex', :element => {:type => ::Thrift::Types::I32}},
-        TOINDEX => {:type => ::Thrift::Types::I32, :name => 'toIndex'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddAlbumToFavorites_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
 
-    class MoveUserPlaylistTracks_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
-      }
+        }
 
-      def struct_fields; FIELDS; end
+        def struct_fields; FIELDS; end
 
-      def validate
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddArtistToFavorites_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        SESSIONID = 2
 
-    class RemoveUserPlaylistByUuid_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      UUID = 1
-      SESSONID = 2
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
 
-      FIELDS = {
-        UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddArtistToFavorites_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
 
-    class RemoveUserPlaylistByUuid_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
-      }
+        }
 
-      def struct_fields; FIELDS; end
+        def struct_fields; FIELDS; end
 
-      def validate
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddFriend_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        USERID = 1
+        SESSIONID = 2
 
-    class RemoveUserPlaylistTracks_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      UUID = 1
-      INDICES = 2
-      SESSONID = 3
+        FIELDS = {
+          USERID => {:type => ::Thrift::Types::I32, :name => 'userId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
 
-      FIELDS = {
-        UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
-        INDICES => {:type => ::Thrift::Types::LIST, :name => 'indices', :element => {:type => ::Thrift::Types::I32}},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddFriend_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
 
-    class RemoveUserPlaylistTracks_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
-      }
+        }
 
-      def struct_fields; FIELDS; end
+        def struct_fields; FIELDS; end
 
-      def validate
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddPlaylistToFavorites_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PLAYLISTUUID = 1
+        SESSIONID = 2
 
-    class RenameUserPlaylistByUuid_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      UUID = 1
-      TITLE = 2
-      SESSONID = 3
+        FIELDS = {
+          PLAYLISTUUID => {:type => ::Thrift::Types::STRING, :name => 'playlistUUID'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
 
-      FIELDS = {
-        UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
-        TITLE => {:type => ::Thrift::Types::STRING, :name => 'title'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddPlaylistToFavorites_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
 
-    class RenameUserPlaylistByUuid_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
-      }
+        }
 
-      def struct_fields; FIELDS; end
+        def struct_fields; FIELDS; end
 
-      def validate
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddTrackToFavorites_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        TRACKID = 1
+        SESSIONID = 2
 
-    class SuggestTracksByArtistIds_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      ARTISTIDS = 1
-      LIMIT = 2
-      SESSONID = 3
+        FIELDS = {
+          TRACKID => {:type => ::Thrift::Types::I32, :name => 'trackId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
 
-      FIELDS = {
-        ARTISTIDS => {:type => ::Thrift::Types::LIST, :name => 'artistIds', :element => {:type => ::Thrift::Types::I32}},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddTrackToFavorites_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
 
-    class SuggestTracksByArtistIds_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Track}}
-      }
+        }
 
-      def struct_fields; FIELDS; end
+        def struct_fields; FIELDS; end
 
-      def validate
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddTracksToUserPlaylist_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PLAYLISTUUID = 1
+        TRACKS = 2
+        POSITION = 3
+        SESSIONID = 4
 
-    class SuggestTracksByTrackIds_args
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      TRACKIDS = 1
-      LIMIT = 2
-      SESSONID = 3
+        FIELDS = {
+          PLAYLISTUUID => {:type => ::Thrift::Types::STRING, :name => 'playlistUUID'},
+          TRACKS => {:type => ::Thrift::Types::LIST, :name => 'tracks', :element => {:type => ::Thrift::Types::I32}},
+          POSITION => {:type => ::Thrift::Types::I32, :name => 'position'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
 
-      FIELDS = {
-        TRACKIDS => {:type => ::Thrift::Types::LIST, :name => 'trackIds', :element => {:type => ::Thrift::Types::I32}},
-        LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
-        SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
-    end
+      class AddTracksToUserPlaylist_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
 
-    class SuggestTracksByTrackIds_result
-      include ::Thrift::Struct, ::Thrift::Struct_Union
-      SUCCESS = 0
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+        }
 
-      FIELDS = {
-        SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Track}}
-      }
+        def struct_fields; FIELDS; end
 
-      def struct_fields; FIELDS; end
+        def validate
+        end
 
-      def validate
+        ::Thrift::Struct.generate_accessors self
       end
 
-      ::Thrift::Struct.generate_accessors self
+      class AddUserPlaylist_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        TITLE = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          TITLE => {:type => ::Thrift::Types::STRING, :name => 'title'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class AddUserPlaylist_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::Playlist}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumById_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ALBUMID = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumById_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::Album}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumMetaData_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ALBUMID = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumMetaData_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::AlbumMetadata}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByArtistId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        LIMIT = 2
+        ORDER = 3
+        SESSIONID = 4
+        FILTER = 5
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::AlbumOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'},
+          FILTER => {:type => ::Thrift::Types::I32, :name => 'filter', :enum_class => ::WiMP::Gen::AlbumFilter}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @order.nil? || ::WiMP::Gen::AlbumOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+          unless @filter.nil? || ::WiMP::Gen::AlbumFilter::VALID_VALUES.include?(@filter)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field filter!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByArtistId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Album}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByArtistIdWithPaging_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        INCLUDESINGLES = 4
+        ORDER = 5
+        SESSIONID = 6
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          INCLUDESINGLES => {:type => ::Thrift::Types::BOOL, :name => 'includeSingles'},
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::AlbumOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @order.nil? || ::WiMP::Gen::AlbumOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByArtistIdWithPaging_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Album}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByCategoryId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        CATEGORYID = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        SESSIONID = 4
+
+        FIELDS = {
+          CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByCategoryId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Album}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByIds_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ALBUMIDS = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ALBUMIDS => {:type => ::Thrift::Types::LIST, :name => 'albumIds', :element => {:type => ::Thrift::Types::I32}},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAlbumsByIds_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Album}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAllUserPlaylists_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSIONID = 1
+
+        FIELDS = {
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetAllUserPlaylists_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Playlist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetArtistById_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetArtistById_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::Artist}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetArtistMetaData_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetArtistMetaData_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::ArtistMetaData}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetBookletURL_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ALBUMID = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetBookletURL_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRING, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetCategories_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        CATEGORYID = 1
+        SESSIONID = 2
+        STARTINDEX = 3
+        LIMIT = 4
+
+        FIELDS = {
+          CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetCategories_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Category}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetCategoryAndSubCategories_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        CATEGORYID = 1
+        DEPTH = 2
+        SESSIONID = 3
+
+        FIELDS = {
+          CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
+          DEPTH => {:type => ::Thrift::Types::I32, :name => 'depth'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetCategoryAndSubCategories_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::CategoryTree}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetCategoryById_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        CATEGORYID = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetCategoryById_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::Category}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteAlbums_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ORDER = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteAlbums_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoriteAlbum}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteAlbumsByProfileId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PROFILEID = 1
+        PARAMPRIVACYLEVEL = 2
+        ORDER = 3
+        SESSIONID = 4
+
+        FIELDS = {
+          PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
+          PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::Gen::PrivacyLevel},
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @paramPrivacyLevel.nil? || ::WiMP::Gen::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+          end
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteAlbumsByProfileId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoriteAlbum}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteArtists_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ORDER = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteArtists_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoriteArtist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteArtistsByProfileId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PROFILEID = 1
+        PARAMPRIVACYLEVEL = 2
+        ORDER = 3
+        SESSIONID = 4
+
+        FIELDS = {
+          PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
+          PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::Gen::PrivacyLevel},
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @paramPrivacyLevel.nil? || ::WiMP::Gen::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+          end
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteArtistsByProfileId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoriteArtist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoritePlaylists_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ORDER = 1
+        SESSIONID = 2
+
+        FIELDS = {
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSIONID => {:type => ::Thrift::Types::STRING, :name => 'sessionId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoritePlaylists_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoritePlaylist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoritePlaylistsByProfileId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PROFILEID = 1
+        PARAMPRIVACYLEVEL = 2
+        ORDER = 3
+        SESSONID = 4
+
+        FIELDS = {
+          PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
+          PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::Gen::PrivacyLevel},
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @paramPrivacyLevel.nil? || ::WiMP::Gen::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+          end
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoritePlaylistsByProfileId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoritePlaylist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteTracks_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ORDER = 1
+        SESSONID = 2
+
+        FIELDS = {
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteTracks_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoriteTrack}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteTracksByProfileId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PROFILEID = 1
+        PARAMPRIVACYLEVEL = 2
+        ORDER = 3
+        SESSONID = 4
+
+        FIELDS = {
+          PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
+          PARAMPRIVACYLEVEL => {:type => ::Thrift::Types::I32, :name => 'paramPrivacyLevel', :enum_class => ::WiMP::Gen::PrivacyLevel},
+          ORDER => {:type => ::Thrift::Types::I32, :name => 'order', :enum_class => ::WiMP::Gen::FavoriteOrderBy},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @paramPrivacyLevel.nil? || ::WiMP::Gen::PrivacyLevel::VALID_VALUES.include?(@paramPrivacyLevel)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field paramPrivacyLevel!')
+          end
+          unless @order.nil? || ::WiMP::Gen::FavoriteOrderBy::VALID_VALUES.include?(@order)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field order!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFavoriteTracksByProfileId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::FavoriteTrack}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetWallPosts_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        PROFILEID = 1
+        STARTINDEX = 2
+        OFFSET = 3
+        SESSONID = 4
+
+        FIELDS = {
+          PROFILEID => {:type => ::Thrift::Types::I32, :name => 'profileId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          OFFSET => {:type => ::Thrift::Types::I32, :name => 'offset'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetWallPosts_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::WallPost}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFriends_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSONID = 1
+
+        FIELDS = {
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetFriends_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Friend}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavAlbum_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSONID = 1
+
+        FIELDS = {
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavAlbum_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavArtist_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSONID = 1
+
+        FIELDS = {
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavArtist_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavPlaylist_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSONID = 1
+
+        FIELDS = {
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavPlaylist_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavTrack_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSONID = 1
+
+        FIELDS = {
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedFavTrack_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedPlaylist_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SESSONID = 1
+
+        FIELDS = {
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetLastUpdatedPlaylist_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::I64, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetPlaylistsByCategoryId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        CATEGORYID = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        SESSONID = 4
+
+        FIELDS = {
+          CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetPlaylistsByCategoryId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Playlist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetProfileTrackPlayListsByArtistId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        SESSONID = 4
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetProfileTrackPlayListsByArtistId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Playlist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetProfileTrackPlayListsInclidingArtistId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        SESSONID = 4
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetProfileTrackPlayListsInclidingArtistId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Playlist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTopTracksByArtistId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTID = 1
+        LIMIT = 2
+        ONLYASMAINARTIST = 3
+        SESSONID = 4
+
+        FIELDS = {
+          ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          ONLYASMAINARTIST => {:type => ::Thrift::Types::BOOL, :name => 'onlyAsMainArtist'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTopTracksByArtistId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Track}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTrackById_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        TRACKID = 1
+        SESSONID = 2
+
+        FIELDS = {
+          TRACKID => {:type => ::Thrift::Types::I32, :name => 'trackId'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTrackById_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::Track}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTracksByAlbumId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ALBUMID = 1
+        SESSONID = 2
+
+        FIELDS = {
+          ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTracksByAlbumId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Track}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTracksByCategoryId_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        CATEGORYID = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        SESSONID = 4
+
+        FIELDS = {
+          CATEGORYID => {:type => ::Thrift::Types::I32, :name => 'categoryId'},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetTracksByCategoryId_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Track}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetUserPlaylistByUuid_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        UUID = 1
+        SESSONID = 2
+
+        FIELDS = {
+          UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetUserPlaylistByUuid_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::WiMP::Gen::Playlist}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetUserPlaylistsByType_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        TYPE = 1
+        STARTINDEX = 2
+        LIMIT = 3
+        SESSONID = 4
+
+        FIELDS = {
+          TYPE => {:type => ::Thrift::Types::I32, :name => 'type', :enum_class => ::WiMP::Gen::PlaylistType},
+          STARTINDEX => {:type => ::Thrift::Types::I32, :name => 'startIndex'},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+          unless @type.nil? || ::WiMP::Gen::PlaylistType::VALID_VALUES.include?(@type)
+            raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field type!')
+          end
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetUserPlaylistsByType_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Playlist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetUserPlaylistsByUuids_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        UUIDS = 1
+        SESSONID = 2
+
+        FIELDS = {
+          UUIDS => {:type => ::Thrift::Types::LIST, :name => 'uuids', :element => {:type => ::Thrift::Types::STRING}},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class GetUserPlaylistsByUuids_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Playlist}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class MoveUserPlaylistTracks_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        UUID = 1
+        FROMINDEX = 2
+        TOINDEX = 3
+        SESSONID = 4
+
+        FIELDS = {
+          UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
+          FROMINDEX => {:type => ::Thrift::Types::LIST, :name => 'fromIndex', :element => {:type => ::Thrift::Types::I32}},
+          TOINDEX => {:type => ::Thrift::Types::I32, :name => 'toIndex'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class MoveUserPlaylistTracks_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class RemoveUserPlaylistByUuid_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        UUID = 1
+        SESSONID = 2
+
+        FIELDS = {
+          UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class RemoveUserPlaylistByUuid_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class RemoveUserPlaylistTracks_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        UUID = 1
+        INDICES = 2
+        SESSONID = 3
+
+        FIELDS = {
+          UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
+          INDICES => {:type => ::Thrift::Types::LIST, :name => 'indices', :element => {:type => ::Thrift::Types::I32}},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class RemoveUserPlaylistTracks_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class RenameUserPlaylistByUuid_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        UUID = 1
+        TITLE = 2
+        SESSONID = 3
+
+        FIELDS = {
+          UUID => {:type => ::Thrift::Types::STRING, :name => 'uuid'},
+          TITLE => {:type => ::Thrift::Types::STRING, :name => 'title'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class RenameUserPlaylistByUuid_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class SuggestTracksByArtistIds_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        ARTISTIDS = 1
+        LIMIT = 2
+        SESSONID = 3
+
+        FIELDS = {
+          ARTISTIDS => {:type => ::Thrift::Types::LIST, :name => 'artistIds', :element => {:type => ::Thrift::Types::I32}},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class SuggestTracksByArtistIds_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Track}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class SuggestTracksByTrackIds_args
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        TRACKIDS = 1
+        LIMIT = 2
+        SESSONID = 3
+
+        FIELDS = {
+          TRACKIDS => {:type => ::Thrift::Types::LIST, :name => 'trackIds', :element => {:type => ::Thrift::Types::I32}},
+          LIMIT => {:type => ::Thrift::Types::I32, :name => 'limit'},
+          SESSONID => {:type => ::Thrift::Types::STRING, :name => 'sessonId'}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
+      class SuggestTracksByTrackIds_result
+        include ::Thrift::Struct, ::Thrift::Struct_Union
+        SUCCESS = 0
+
+        FIELDS = {
+          SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::STRUCT, :class => ::WiMP::Gen::Track}}
+        }
+
+        def struct_fields; FIELDS; end
+
+        def validate
+        end
+
+        ::Thrift::Struct.generate_accessors self
+      end
+
     end
 
   end
-
 end

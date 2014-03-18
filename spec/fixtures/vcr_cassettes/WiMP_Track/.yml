@@ -1,0 +1,169 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://client.wimpmusic.com/clientapi/servicelogin
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAQAAAAtzaW1wbGVMb2dpbgAAAAALAAEAAAAVdXVhYUByZWFsbHlteW1h
+        aWwuY29tCwACAAAABnFkZ2ZiYgsAAwAAAAZ3aW1wc2ULAAQAAAAJc2xiaDRV
+        VWdICwAFAAAAFUFuZHJvaWRfV0lNUC0yLjUuMi5zZQsABgAAAAo4MjYzMzcx
+        MDg0AA==
+    headers:
+      Content-Type:
+      - application/x-thrift
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.1.19
+      Date:
+      - Tue, 18 Mar 2014 11:14:56 GMT
+      Content-Type:
+      - application/x-thrift
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - 'Servlet 2.4; JBoss-4.0.5.GA (build: CVSTag=Branch_4_0 date=200610162339)/Tomcat-5.5'
+      Access-Control-Allow-Origin:
+      - '*'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAgAAAAtzaW1wbGVMb2dpbgAAAAAMAAAIAAEANcYACAACAOdHGgoABAAA
+        AUTUnno5CwAFAAAAGFZ0SXhDeEw5b01tcE5sb1JrRzhBTjhJbQsABwAAAAVW
+        QUxJRAgACAAAAD4CAAkAAgAKAQoACwAAAUVxtBr/CAAMAAAAAQgADQAAAAEI
+        AA4AAAABCAAPAAAAAQsAEAAAABV1dWFhQHJlYWxseW15bWFpbC5jb20KABEA
+        AAFE+3jFfwgAEgAAAAMKABMAAAAAAAAAAAsAFAAAAAVJTlRSTwIAFQECABYA
+        CAAXAAAABAoAGAAAAAAAAAAACgAZAAAAAAAAAAAKABoAAAAAAAAAAAoAGwAA
+        AAAAAAAACgAcAAAAAAAAAAAIAB0AAAABAAA=
+    http_version: 
+  recorded_at: Tue, 18 Mar 2014 11:14:58 GMT
+- request:
+    method: post
+    uri: http://client.wimpmusic.com/clientapi/service
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAQAAAAZzZWFyY2gAAAAACwABAAAAD21hZG9ubmEgaHVuZyB1cAgAAgAA
+        AAAIAAMAAAAACAAEAAAACgsABQAAABhWdEl4Q3hMOW9NbXBObG9Sa0c4QU44
+        SW0IAAYAAAAAAA==
+    headers:
+      Content-Type:
+      - application/x-thrift
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.1.19
+      Date:
+      - Tue, 18 Mar 2014 11:14:56 GMT
+      Content-Type:
+      - application/x-thrift
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - 'Servlet 2.4; JBoss-4.0.5.GA (build: CVSTag=Branch_4_0 date=200610162339)/Tomcat-5.5'
+      Access-Control-Allow-Origin:
+      - '*'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAgAAAAZzZWFyY2gAAAAADAAADwABDAAAAAAPAAIMAAAABQsAAQAAAAdI
+        dW5nIFVwCwACAAAAB01hZG9ubmEIAAMAADy5CAAEAAR2nAsABQAAABRIdW5n
+        IFVwIChJbnQnbCBNYXhpKQsABgAAAGUyMDA1IFdhcm5lciBCcm9zLiBSZWNv
+        cmRzIEluYy4gZm9yIHRoZSBVLlMuIGFuZCBXRUEgSW50ZXJuYXRpb25hbCBJ
+        bmMuIGZvciB0aGUgd29ybGQgb3V0c2lkZSB0aGUgVS5TLggABwAAAMsIAAsA
+        BHadCAANAAAAAQgADgAAAAELAA8AAAANUmFkaW8gVmVyc2lvbgoAEAAAAQdY
+        W6WAAgARAQIAEgEEABMAAAAAAAAAAAIAFQACABYACwAXAAAAA1MwMgsAGAAA
+        AAJFUAIAGQEIABoAAAABCAAbAADcUQgAHAAAAAAEAB0AAAAAAAAAAAwAHgsA
+        AQAAABVXYXJuZXIgQnJvcy4vTWF2ZXJpY2sIAAIAAAOTCwADAAAAA1dNRwgA
+        BAAAAVYLAAUAAAAVV2FybmVyIEJyb3MuL01hdmVyaWNrCAAGAAf0YAAIAB8A
+        AAAACgAgAAABB1hbpYALACEAAABIaHR0cDovL3dkYy5hc3Bpcm8uY29tL2Rj
+        L3BzZXI/cHJvZHVjdElkPTI5MjUwOSZjb250ZW50VHlwZUlkPTEyJmNjb2Rl
+        PVBUAgAjAAgAJAAAAEwLACUAAAB9MjAwNSBXYXJuZXIgQnJvcy4gUmVjb3Jk
+        cyBJbmMuIGZvciB0aGUgVS5TLiBhbmQgV0VBIEludGVybmF0aW9uYWwgSW5j
+        LiBmb3IgdGhlIHdvcmxkIG91dHNpZGUgdGhlIFUuUy4gLyBXYXJuZXIgQnJv
+        cy4vTWF2ZXJpY2sACwABAAAADkh1bmcgVXAgW0xpdmVdCwACAAAAB01hZG9u
+        bmEIAAMAADy5CAAEAAYB0QsABQAAABRUaGUgQ29uZmVzc2lvbnMgVG91cgsA
+        BgAAAGUyMDA2IFdhcm5lciBCcm9zLiBSZWNvcmRzIEluYy4gZm9yIHRoZSBV
+        LlMuIGFuZCBXRUEgSW50ZXJuYXRpb25hbCBJbmMuIGZvciB0aGUgd29ybGQg
+        b3V0c2lkZSB0aGUgVS5TLggABwAAAk4IAAsABgHeCAANAAAAAQgADgAAAA0L
+        AA8AAAAETGl2ZQoAEAAAARBq77mAAgARAQIAEgEEABMAAAAAAAAAAAIAFQAC
+        ABYACwAXAAAAA1MwMgsAGAAAAAVBbGJ1bQIAGQEIABoAAAABCAAbAAAQvggA
+        HAAAAAAEAB0AAAAAAAAAAAwAHgsAAQAAAA9XYXJuZXIgQnJvdGhlcnMIAAIA
+        AVtZCwADAAAAA1dNRwgABAAAAVYLAAUAAAAITWF2ZXJpY2sIAAYAEQlQAAgA
+        HwAAAAAKACAAAAEQau+5gAsAIQAAAEhodHRwOi8vd2RjLmFzcGlyby5jb20v
+        ZGMvcHNlcj9wcm9kdWN0SWQ9MzkzNjk0JmNvbnRlbnRUeXBlSWQ9MTImY2Nv
+        ZGU9UFQCACMACAAkAAAAFAsAJQAAAHcyMDA2IFdhcm5lciBCcm9zLiBSZWNv
+        cmRzIEluYy4gZm9yIHRoZSBVLlMuIGFuZCBXRUEgSW50ZXJuYXRpb25hbCBJ
+        bmMuIGZvciB0aGUgd29ybGQgb3V0c2lkZSB0aGUgVS5TLiAvIFdhcm5lciBC
+        cm90aGVycwALAAEAAAAcSHVuZyBVcCAoU0RQIEV4dGVuZGVkIFZvY2FsKQsA
+        AgAAAAdNYWRvbm5hCAADAAA8uQgABAAEfBULAAUAAAAUSHVuZyBVcCAoREog
+        VmVyc2lvbikLAAYAAABlMjAwNSBXYXJuZXIgQnJvcy4gUmVjb3JkcyBJbmMu
+        IGZvciB0aGUgVS5TLiBhbmQgV0VBIEludGVybmF0aW9uYWwgSW5jLiBmb3Ig
+        dGhlIHdvcmxkIG91dHNpZGUgdGhlIFUuUy4IAAcAAAHdCAALAAR8FggADQAA
+        AAEIAA4AAAABCwAPAAAAElNEUCBFeHRlbmRlZCBWb2NhbAoAEAAAAQmZI+WA
+        AgARAQIAEgEEABMAAAAAAAAAAAIAFQACABYACwAXAAAAA1MwMgsAGAAAAAVB
+        bGJ1bQIAGQEIABoAAAABCAAbAAAFhAgAHAAAAAAEAB0AAAAAAAAAAAwAHgsA
+        AQAAAA9XYXJuZXIgQnJvdGhlcnMIAAIAAVtZCwADAAAAA1dNRwgABAAAAVYL
+        AAUAAAAMV2FybmVyIEJyb3MuCAAGABD3ZQAIAB8AAAAACgAgAAABCZkj5YAL
+        ACEAAABIaHR0cDovL3dkYy5hc3Bpcm8uY29tL2RjL3BzZXI/cHJvZHVjdElk
+        PTI5MzkxMCZjb250ZW50VHlwZUlkPTEyJmNjb2RlPVBUAgAjAAgAJAAAAA4L
+        ACUAAAB3MjAwNSBXYXJuZXIgQnJvcy4gUmVjb3JkcyBJbmMuIGZvciB0aGUg
+        VS5TLiBhbmQgV0VBIEludGVybmF0aW9uYWwgSW5jLiBmb3IgdGhlIHdvcmxk
+        IG91dHNpZGUgdGhlIFUuUy4gLyBXYXJuZXIgQnJvdGhlcnMACwABAAAAI0h1
+        bmcgVXAgKFNEUCBFeHRlbmRlZCBWb2NhbCkgKEVkaXQpCwACAAAAB01hZG9u
+        bmEIAAMAADy5CAAEABlTwQsABQAAABFIdW5nIFVwIChSZW1peGVzKQsABgAA
+        AGUyMDA1IFdhcm5lciBCcm9zLiBSZWNvcmRzIEluYy4gZm9yIHRoZSBVLlMu
+        IGFuZCBXRUEgSW50ZXJuYXRpb25hbCBJbmMuIGZvciB0aGUgd29ybGQgb3V0
+        c2lkZSB0aGUgVS5TLggABwAAASkIAAsAGVPCCAANAAAAAQgADgAAAAELAA8A
+        AAAZU0RQIEV4dGVuZGVkIFZvY2FsICAgRWRpdAoAEAAAAQb7cj8AAgARAQIA
+        EgEEABMAAAAAAAAAAAIAFQACABYACwAXAAAAA1MwMgsAGAAAAAJFUAIAGQEI
+        ABoAAAABCAAbAAAC3AgAHAAAAAAEAB0AAAAAAAAAAAwAHgsAAQAAAA9XYXJu
+        ZXIgQnJvdGhlcnMIAAIAAVtZCwADAAAAA1dNRwgABAAAAVYLAAUAAAAVV2Fy
+        bmVyIEJyb3MuL01hdmVyaWNrCAAGABELEwAIAB8AAAAACgAgAAABBvtyPwAL
+        ACEAAABJaHR0cDovL3dkYy5hc3Bpcm8uY29tL2RjL3BzZXI/cHJvZHVjdElk
+        PTE2NTk4NDImY29udGVudFR5cGVJZD0xMiZjY29kZT1QVAIAIwAIACQAAAAM
+        CwAlAAAAdzIwMDUgV2FybmVyIEJyb3MuIFJlY29yZHMgSW5jLiBmb3IgdGhl
+        IFUuUy4gYW5kIFdFQSBJbnRlcm5hdGlvbmFsIEluYy4gZm9yIHRoZSB3b3Js
+        ZCBvdXRzaWRlIHRoZSBVLlMuIC8gV2FybmVyIEJyb3RoZXJzAAsAAQAAAB9I
+        dW5nIFVwIChDaHVzICYgQ2ViYWxsb3MgUmVtaXgpCwACAAAAB01hZG9ubmEI
+        AAMAADy5CAAEAAR8FQsABQAAABRIdW5nIFVwIChESiBWZXJzaW9uKQsABgAA
+        AGUyMDA1IFdhcm5lciBCcm9zLiBSZWNvcmRzIEluYy4gZm9yIHRoZSBVLlMu
+        IGFuZCBXRUEgSW50ZXJuYXRpb25hbCBJbmMuIGZvciB0aGUgd29ybGQgb3V0
+        c2lkZSB0aGUgVS5TLggABwAAAkQIAAsABHwZCAANAAAAAQgADgAAAAQLAA8A
+        AAAVQ2h1cyAmIENlYmFsbG9zIFJlbWl4CgAQAAAAAAAAAAACABEAAgASAQQA
+        EwAAAAAAAAAAAgAVAQIAFgALABcAAAAACwAYAAAABUFsYnVtAgAZAQgAGgAA
+        AAEIABsAAAGrCAAcAAAAAAQAHQAAAAAAAAAADAAeCwABAAAAD1dhcm5lciBC
+        cm90aGVycwgAAgABW1kLAAMAAAADV01HCAAEAAABVgsABQAAAAxXYXJuZXIg
+        QnJvcy4IAAYAEPdlAAgAHwAAAAAKACAAAAEJmSPlgAsAIQAAAEhodHRwOi8v
+        d2RjLmFzcGlyby5jb20vZGMvcHNlcj9wcm9kdWN0SWQ9MjkzOTEzJmNvbnRl
+        bnRUeXBlSWQ9MTImY2NvZGU9UFQCACMACAAkAAAADAsAJQAAAHcyMDA1IFdh
+        cm5lciBCcm9zLiBSZWNvcmRzIEluYy4gZm9yIHRoZSBVLlMuIGFuZCBXRUEg
+        SW50ZXJuYXRpb25hbCBJbmMuIGZvciB0aGUgd29ybGQgb3V0c2lkZSB0aGUg
+        VS5TLiAvIFdhcm5lciBCcm90aGVycwAPAAMMAAAAAAAA
+    http_version: 
+  recorded_at: Tue, 18 Mar 2014 11:14:58 GMT
+recorded_with: VCR 2.8.0

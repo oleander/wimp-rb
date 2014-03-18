@@ -8,4 +8,6 @@ require 'thrift'
 require 'services_types'
 
 module WiMP
+  module Gen
+  end
 end
