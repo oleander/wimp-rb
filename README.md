@@ -118,7 +118,7 @@ those methods.
 ### Where is the rest of the implementation?
 
 Take a look at the `lib/gen` folder for more, undocumented code. Code
-exists for all 50 some methods in the thirft directory, but only a few are
+exists for all 50 some methods in the thrift directory, but only a few are
 ported to a Ruby-friendly syntax and documented above. You're more than
 welcome to help me migrate all these methods.
 
