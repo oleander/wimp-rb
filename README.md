@@ -133,7 +133,7 @@ That's because a session is created.
 
 3. None of the credentials in this project are my own. They're 
 only created to be used in the specs. They might therefore already 
-be exired when you read this.
+be expired when you read this.
 
 ## Contributing
 
