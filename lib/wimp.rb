@@ -5,6 +5,7 @@ require "wimp/version"
 require "wimp/error"
 require "wimp/base"
 require "wimp/track"
+require "wimp/playlist"
 
 module WiMP
   class << self

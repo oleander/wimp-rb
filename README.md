@@ -127,6 +127,24 @@ Take a look in at the `lib/gen` folder for more, undocumented code.
 
 ### Playlist
 
+struct Playlist {
+  1: required i32 count;
+  2: required i32 createdByArtistId;
+  3: required i32 duration;
+  4: optional string imgPath;
+  5: required i64 lastUpdated;
+  6: required string playlistName;
+  7: required i32 profileId;
+  8: required i64 registeredDate;
+  9: optional list<Track> tracks;
+  10: required string uuid;
+  11: optional i32 type;
+  12: optional string desc;
+  13: required i32 id;
+  14: optional string createdByNickName;
+}
+
+
 ## Notes
 
 1. Not all methods below are implemented as below but 

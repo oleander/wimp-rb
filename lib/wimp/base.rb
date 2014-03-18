@@ -18,5 +18,13 @@ module WiMP
     def execute(&block)
       Base.execute(&block)
     end
+
+    def self.session
+      WiMP.configuration.session
+    end
+
+    def session
+      WiMP.configuration.session
+    end
   end
 end
