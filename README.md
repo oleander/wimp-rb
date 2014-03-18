@@ -98,7 +98,7 @@ which means that code to over 7 languages can be generated.
 Take a look in the `resources/thrift` folder and the `Rakefile` 
 file for more information on how this could be done.
 
-[Here is a good thift tutorial](http://diwakergupta.github.io/thrift-missing-guide/) 
+[Here is a good thirft tutorial](http://diwakergupta.github.io/thrift-missing-guide/) 
 that explains the basics.
 
 ### Can I stream music using this library?
@@ -109,7 +109,7 @@ those methods.
 ### Where are the rest of the implementation?
 
 Take a look at the `lib/gen` folder for more, undocumented code. Code
-exists for all 50 some methods in the thift directory, but only a few are
+exists for all 50 some methods in the thirft directory, but only a few are
 ported to a Ruby-friendly syntax and documented above. You're more than
 welcome to help me migrate all these methods.
 
