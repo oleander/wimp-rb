@@ -1,6 +1,6 @@
 # WiMP
 
-Ruby bindings for [WiMP](http://wimpmusic.com). This library uses WiMPs internal RPC API.
+Ruby bindings for [WiMP](http://wimpmusic.com). It uses WiMPs internal RPC API.
 Take a look at the [FAQ](#faq) for frequently asked questions and how to port this library to any other language using [thrift](http://thrift.apache.org/).
 
 ## Installation
@@ -20,7 +20,7 @@ WiMP.configure do |config|
 end
 ```
 
-### Track
+### WiMP::Track
 
 #### Search
 
@@ -30,7 +30,7 @@ tracks = WiMP::Track.search(query, {
 })
 ```
 
-### Playlist
+### WiMP::Playlist
 
 Note that you can only read and update your own playlists, 
 not someone else's.
@@ -71,25 +71,25 @@ status = playlist.remove_tracks_by_indices(tracks)
 
 ## Containers
 
-### Track
+### WiMP::Track
 
 - title **String**
 - album_id **Integer**
 - duration **Integer**
 - id **Integer**
 - popularity **Integer**
-- artist **SimpleArtist**
+- artist **WiMP::SimpleArtist**
 - url **String**
 
-### Playlist
+### WiMP::Playlist
 
 - count **Integer**
 - url **String**
-- tracks **Array<Track>**
+- tracks **Array< WiMP::Track >**
 - uuid **String**
 - id **Integer**
 
-### SimpleArtist
+### WiMP::SimpleArtist
 
 - id **Integer**
 - name **String**
