@@ -106,20 +106,19 @@ Take a look in at the `lib/gen` folder for more, undocumented code.
 
 ## Notes
 
-1. Not all methods below are implemented as below but 
-  the code for all of them exists. Navigate the `lib` folder for more 
-  information.
+1. Not all methods existing in the offical API are documented above, but 
+the code for all of them exists. Navigate the `lib` folder for more information.
 
-2. The first request to the API will be a bit slower than the rest.
-  That's because at the first request a session is created. The sesson isn't store
-  on your local computer, but is instead kept in memory during execution.
+2. The first request to the API will be slower than the rest.
+That's because a session is created.
 
 3. None of the credentials in this project are my own. They're 
-  only created to be used in the specs.
+only created to be used in the specs. They might therefore already be exired
+and when you read this.
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/wimp/fork )
+1. Fork it ( http://github.com/oleander/wimp-api-rb/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
