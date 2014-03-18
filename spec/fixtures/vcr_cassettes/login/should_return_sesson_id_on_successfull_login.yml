@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://client.wimpmusic.com/clientapi/servicelogin
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAQAAAAtzaW1wbGVMb2dpbgAAAAALAAEAAAAVdXVhYUByZWFsbHlteW1h
+        aWwuY29tCwACAAAABnFkZ2ZiYgsAAwAAAAZ3aW1wc2ULAAQAAAAJc2xiaDRV
+        VWdICwAFAAAAFUFuZHJvaWRfV0lNUC0yLjUuMi5zZQsABgAAAAo4MjYzMzcx
+        MDg0AA==
+    headers:
+      Content-Type:
+      - application/x-thrift
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.1.19
+      Date:
+      - Tue, 18 Mar 2014 10:20:18 GMT
+      Content-Type:
+      - application/x-thrift
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - 'Servlet 2.4; JBoss-4.0.5.GA (build: CVSTag=Branch_4_0 date=200610162339)/Tomcat-5.5'
+      Access-Control-Allow-Origin:
+      - '*'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        gAEAAgAAAAtzaW1wbGVMb2dpbgAAAAAMAAAIAAEANcYACAACAOdHGgoABAAA
+        AUTUnno5CwAFAAAAGHRtU0ZkQnE5QWE1am83eG14ZVZRWGN6agsABwAAAAVW
+        QUxJRAgACAAAAD4CAAkAAgAKAQoACwAAAUVxtBr/CAAMAAAAAQgADQAAAAEI
+        AA4AAAABCAAPAAAAAQsAEAAAABV1dWFhQHJlYWxseW15bWFpbC5jb20KABEA
+        AAFE+3jFfwgAEgAAAAMKABMAAAAAAAAAAAsAFAAAAAVJTlRSTwIAFQECABYA
+        CAAXAAAABAoAGAAAAAAAAAAACgAZAAAAAAAAAAAKABoAAAAAAAAAAAoAGwAA
+        AAAAAAAACgAcAAAAAAAAAAAIAB0AAAABAAA=
+    http_version: 
+  recorded_at: Tue, 18 Mar 2014 10:20:21 GMT
+recorded_with: VCR 2.8.0
