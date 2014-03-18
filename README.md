@@ -1,6 +1,6 @@
-# Wimp
+# WiMP
 
-Ruby bindings for WiMP. The library uses WiMPs internal RPC API.
+Ruby bindings for [WiMP](http://wimpmusic.com). The library uses WiMPs internal RPC API.
 Take a look at the [FAQ](#faq) for frequently asked questions. 
 
 ## Installation
@@ -33,6 +33,18 @@ tracks = WiMP::Track.search(query, {
 
 ### Playlist
 
+#### Find playlist
+
+``` ruby
+playlist = WiMP::Playlist.find(uuid)
+```
+
+#### Create playlist
+
+``` ruby
+playlist = WiMP::Playlist.create(title)
+```
+
 #### Add tracks using tracks
 
 ``` ruby
@@ -49,22 +61,10 @@ status = playlist.add_tracks_by_id(track_ids, {
 })
 ```
 
-#### Create playlist
-
-``` ruby
-playlist = WiMP::Playlist.create(title)
-```
-
 #### Remove tracks
 
 ``` ruby
 status = playlist.remove_tracks_by_indices(tracks)
-```
-
-#### Find playlist
-
-``` ruby
-playlist = WiMP::Playlist.find(uuid)
 ```
 
 ## FAQ
