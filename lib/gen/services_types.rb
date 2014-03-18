@@ -271,7 +271,7 @@ module WiMP
         ID => {:type => ::Thrift::Types::I32, :name => 'id'},
         CONTENTACCESSSTRING => {:type => ::Thrift::Types::STRING, :name => 'contentAccessString', :optional => true},
         VOLUMENUMBER => {:type => ::Thrift::Types::I32, :name => 'volumeNumber'},
-        TRACKNUMBER => {:type => ::Thrift::Types::I32, :name => 'trackNumber'},
+        TRACKNUMBER => {:type => ::Thrift::Types::I32, :name => 'trackNumber', :optional => true},
         VERSION => {:type => ::Thrift::Types::STRING, :name => 'version', :optional => true},
         SALESSTARTDATE => {:type => ::Thrift::Types::I64, :name => 'salesStartDate'},
         SALESREADY => {:type => ::Thrift::Types::BOOL, :name => 'salesReady'},
@@ -308,7 +308,6 @@ module WiMP
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field duration is unset!') unless @duration
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field id is unset!') unless @id
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field volumeNumber is unset!') unless @volumeNumber
-        raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field trackNumber is unset!') unless @trackNumber
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field salesStartDate is unset!') unless @salesStartDate
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field salesReady is unset!') if @salesReady.nil?
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field streamReady is unset!') if @streamReady.nil?

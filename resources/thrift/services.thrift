@@ -104,7 +104,7 @@ struct Track {
   11: required i32 id;
   12: optional string contentAccessString;
   13: required i32 volumeNumber;
-  14: required i32 trackNumber;
+  14: optional i32 trackNumber;
   15: optional string version;
   16: required i64 salesStartDate;
   17: required bool salesReady;
