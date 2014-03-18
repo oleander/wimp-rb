@@ -73,5 +73,12 @@ module WiMP
     def artist
       @o.artist
     end
+
+    #
+    # @return String
+    #
+    def title
+      @o.title
+    end
   end
 end

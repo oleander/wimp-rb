@@ -73,6 +73,7 @@ status = playlist.remove_tracks_by_indices(tracks)
 
 ### Track
 
+- title **String**
 - artist **String**
 - artist_id **Integer**
 - album_id **Integer**

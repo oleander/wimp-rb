@@ -27,7 +27,7 @@ http_interactions:
       Server:
       - nginx/1.1.19
       Date:
-      - Tue, 18 Mar 2014 11:17:55 GMT
+      - Tue, 18 Mar 2014 15:49:02 GMT
       Content-Type:
       - application/x-thrift
       Transfer-Encoding:
@@ -42,14 +42,14 @@ http_interactions:
       encoding: ASCII-8BIT
       string: !binary |-
         gAEAAgAAAAtzaW1wbGVMb2dpbgAAAAAMAAAIAAEANcYACAACAOdHGgoABAAA
-        AUTUnno5CwAFAAAAGHhJWEZUelN4WEFlQVpyc1FrbmVqNWg3RwsABwAAAAVW
+        AUTUnno5CwAFAAAAGEtBVEZiM0lmRnFXSXVnSG9sQU5zOHVTaQsABwAAAAVW
         QUxJRAgACAAAAD4CAAkAAgAKAQoACwAAAUVxtBr/CAAMAAAAAQgADQAAAAEI
         AA4AAAABCAAPAAAAAQsAEAAAABV1dWFhQHJlYWxseW15bWFpbC5jb20KABEA
         AAFE+3jFfwgAEgAAAAMKABMAAAAAAAAAAAsAFAAAAAVJTlRSTwIAFQECABYA
-        CAAXAAAABAoAGAAAAAAAAAAACgAZAAAAAAAAAAAKABoAAAAAAAAAAAoAGwAA
-        AAAAAAAACgAcAAAAAAAAAAAIAB0AAAABAAA=
+        CAAXAAAABAoAGAAAAAAAAAAACgAZAAABRNV9xaYKABoAAAAAAAAAAAoAGwAA
+        AAAAAAAACgAcAAABRNV9xaYIAB0AAAABAAA=
     http_version: 
-  recorded_at: Tue, 18 Mar 2014 11:17:58 GMT
+  recorded_at: Tue, 18 Mar 2014 15:49:02 GMT
 - request:
     method: post
     uri: http://client.wimpmusic.com/clientapi/service
@@ -57,8 +57,8 @@ http_interactions:
       encoding: ASCII-8BIT
       string: !binary |-
         gAEAAQAAAAZzZWFyY2gAAAAACwABAAAAD21hZG9ubmEgaHVuZyB1cAgAAgAA
-        AAAIAAMAAAAACAAEAAAACgsABQAAABh4SVhGVHpTeFhBZUFacnNRa25lajVo
-        N0cIAAYAAAAAAA==
+        AAAIAAMAAAAACAAEAAAACgsABQAAABhLQVRGYjNJZkZxV0l1Z0hvbEFOczh1
+        U2kIAAYAAAAAAA==
     headers:
       Content-Type:
       - application/x-thrift
@@ -76,7 +76,7 @@ http_interactions:
       Server:
       - nginx/1.1.19
       Date:
-      - Tue, 18 Mar 2014 11:17:55 GMT
+      - Tue, 18 Mar 2014 15:49:02 GMT
       Content-Type:
       - application/x-thrift
       Transfer-Encoding:
@@ -165,5 +165,5 @@ http_interactions:
         SW50ZXJuYXRpb25hbCBJbmMuIGZvciB0aGUgd29ybGQgb3V0c2lkZSB0aGUg
         VS5TLiAvIFdhcm5lciBCcm90aGVycwAPAAMMAAAAAAAA
     http_version: 
-  recorded_at: Tue, 18 Mar 2014 11:17:58 GMT
+  recorded_at: Tue, 18 Mar 2014 15:49:03 GMT
 recorded_with: VCR 2.8.0

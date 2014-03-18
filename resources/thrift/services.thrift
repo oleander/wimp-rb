@@ -91,6 +91,7 @@ struct RecordLabel {
 }
 
 struct Track {
+  1: required string title;
   2: required string artist;
   3: required i32 artistId;
   4: required i32 albumId;

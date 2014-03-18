@@ -10,6 +10,7 @@ describe WiMP::Track, vcr: {record: :new_episodes} do
     tracks = WiMP::Track.search("madonna hung up")
     tracks.should_not be_empty
     tracks.each do |track|
+      track.title.should be_a(String)
       track.id.should be_a(Integer)
       track.artist.should be_a(String)
       track.artist_id.should be_a(Integer)

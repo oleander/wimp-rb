@@ -219,6 +219,7 @@ module WiMP
 
     class Track
       include ::Thrift::Struct, ::Thrift::Struct_Union
+      TITLE = 1
       ARTIST = 2
       ARTISTID = 3
       ALBUMID = 4
@@ -257,6 +258,7 @@ module WiMP
       REVISEDCOPYRIGHT = 37
 
       FIELDS = {
+        TITLE => {:type => ::Thrift::Types::STRING, :name => 'title'},
         ARTIST => {:type => ::Thrift::Types::STRING, :name => 'artist'},
         ARTISTID => {:type => ::Thrift::Types::I32, :name => 'artistId'},
         ALBUMID => {:type => ::Thrift::Types::I32, :name => 'albumId'},
@@ -298,6 +300,7 @@ module WiMP
       def struct_fields; FIELDS; end
 
       def validate
+        raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field title is unset!') unless @title
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field artist is unset!') unless @artist
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field artistId is unset!') unless @artistId
         raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Required field albumId is unset!') unless @albumId
