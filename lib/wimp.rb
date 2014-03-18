@@ -1,4 +1,4 @@
-$:.push('./lib/gen')
+$:.unshift File.join(File.dirname(__FILE__), "gen")
 require "gen/client_api_login_service"
 require "gen/client_api_service"
 require "wimp/version"
