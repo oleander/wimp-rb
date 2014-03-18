@@ -127,13 +127,13 @@ In other words; check the data being passed from this library. Is it correct?
 
 1. Not all methods existing in the offical API are documented above, but 
 the code for all of them exists. Navigate the `lib` folder for more information.
-
 2. The first request to the API will be slower than the rest.
 That's because a session is created.
-
 3. None of the credentials in this project are my own. They're 
 only created to be used in the specs. They might therefore already 
 be expired when you read this.
+4. This library has been created for educational purposes. You shouldn't
+use it without first consulting WiMP.
 
 ## Contributing
 
