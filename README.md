@@ -1,7 +1,7 @@
 # WiMP
 
-Ruby bindings for [WiMP](http://wimpmusic.com). The library uses WiMPs internal RPC API.
-Take a look at the [FAQ](#faq) for frequently asked questions. 
+Ruby bindings for [WiMP](http://wimpmusic.com). This library uses WiMPs internal RPC API.
+Take a look at the [FAQ](#faq) for frequently asked questions and how to port this library to any other language using [thrift](http://thrift.apache.org/).
 
 ## Installation
 
@@ -33,19 +33,22 @@ tracks = WiMP::Track.search(query, {
 
 ### Playlist
 
-#### Find playlist
+Note that you can only read and update your own playlists, 
+not someone else's.
+
+#### Find a playlist
 
 ``` ruby
 playlist = WiMP::Playlist.find(uuid)
 ```
 
-#### Create playlist
+#### Create a playlist
 
 ``` ruby
 playlist = WiMP::Playlist.create(title)
 ```
 
-#### Add tracks using tracks
+#### Add tracks to playlist
 
 ``` ruby
 status = playlist.add_tracks(tracks, {
@@ -53,7 +56,7 @@ status = playlist.add_tracks(tracks, {
 })
 ```
 
-#### Add tracks using track ids
+#### Add tracks to playlist using Track#id
 
 ``` ruby
 status = playlist.add_tracks_by_id(track_ids, {
@@ -61,7 +64,7 @@ status = playlist.add_tracks_by_id(track_ids, {
 })
 ```
 
-#### Remove tracks
+#### Remove tracks from playlist
 
 ``` ruby
 status = playlist.remove_tracks_by_indices(tracks)
@@ -74,15 +77,34 @@ status = playlist.remove_tracks_by_indices(tracks)
 Yes. WiMP uses [thrift](http://thrift.apache.org/) behind the scene, 
 which means that code to over 7 languages can be generated.
 
-Take a look in the `resources` folder for more information.
+Take a look in the `resources/thrift` folder and the `Rakefile` 
+file for more information on how this could be done.
 
-### Can I stream music?
+[Here is a good thift tutorial](http://diwakergupta.github.io/thrift-missing-guide/) 
+that explains the basics.
 
-The WiMP API has support for streaming, but this library doesn't.
+### Can I stream music using this library?
 
-### Where are the rest of the inplementation?
+The WiMP API has support for streaming, but I've chosen not to document 
+those methods with respect to the WiMP.
 
-Take a look in at the `lib/gen` folder for more, undocumented code.
+### Where are the rest of the implementation?
+
+Take a look at the `lib/gen` folder for more, undocumented code. Code
+exists for all 50 some methods in the thift directory, but only a few are
+ported to a Ruby-friendly syntax and documented above. You're more than
+welcome to help me migrate all these methods.
+
+Some methods from the offical API isn't ported to thrift. You'll find a list
+of these in the `resources/skiped-methods.md` file.
+
+### I'm get an `Thrift::ApplicationException` error when running method X
+
+The `Thrift::ApplicationException` error indicates that the returning data
+from WiMP isn't what we think it is. It's usually caused by invalid data being passed
+to thrift. 
+
+In other words; check the data being passed from this library. Is it correct?
 
 ## Containers
 
